@@ -6,13 +6,19 @@ class Snake {
         this.w = w
         this.h = h
 
-        this.vx = 0
+        this.vx = -CELL_SIZE // Siempre inicia yéndose para la derecha, en dirección a la cabeza
 
     }
 
-    draw () {
-        this.ctx.fillStyle = "black" 
-        this.ctx.fillRect(this.x, this.y, this.w, this.h)
+    draw (i) {
+        if (i === 0) {
+            this.ctx.fillStyle = "red" 
+            this.ctx.fillRect(this.x, this.y, this.w, this.h)
+        } else {
+            this.ctx.fillStyle = "black" 
+            this.ctx.fillRect(this.x, this.y, this.w, this.h)
+        }
+        
     }
 
     move () {
