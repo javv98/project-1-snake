@@ -18,4 +18,5 @@ class Snake {
     move () {
         this.x += this.vx
     }
+
 }

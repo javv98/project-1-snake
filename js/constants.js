@@ -5,8 +5,9 @@ const GAME_GRID = 40 // Cuantas casillas en cada fila quiero que haya en el jueg
 const CELL_SIZE = GAME_W / GAME_GRID //El tamaño de cada celda
 
 // Tamaño de la serpiente
-const SNAKE_W = CELL_SIZE * 4 // El tamaño empezará siendo 4 veces la casilla del canvas
+const SNAKE_W = CELL_SIZE // El tamaño mínimo de la serpiente será 1 casilla
 const SNAKE_H = GAME_H / GAME_GRID // El largo siempre será de una casilla
+const SNAKE_CELLS = 3 // Tamaño inicial de la serpiente en celdas
 
 // Donde sale (siempre en medio)
 const SNAKE_X = GAME_W / 2 // Relacionar el tamaño del juego a la posición donde salga la serpiente, para que siempre salga a la mitad
