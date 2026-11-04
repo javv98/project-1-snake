@@ -6,26 +6,41 @@ class Game {
         this.ctx = this.canvas.getContext("2d")
 
         this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H)
-
         this.intervalId = null
+
     }
 
     start () {
+        this.snake.firstBody()
         this.intervalId = setInterval(() => {
         this.clear()
         this.move()
         this.draw()
         this.endGame()
-        }, 1000 / 10)
+        }, 1000 / 5)
 
     }
 
     draw () {
-    this.snake.draw()
+        this.snake.draw()
+        this.snake.body.forEach((part) => {
+            part.draw()
+        })
     }
 
-    move () {
-    this.snake.move()
+    move () { // El move guarda primero la posición original de la serpiente y su cuerpo y luego mueve al resto del cuerpo en base a los valores anteriores
+        let snakeXPosition = this.snake.x
+        let snakeYPosition = this.snake.y
+        let bodyXPositions = this.snake.body.map((part) => part.x) // POR AQUÍ, estoy intentando guardar las x e y iniciales para luego ponerlas 
+        let bodyYPositions = this.snake.body.map((part) => part.y)
+        this.snake.move()
+        this.snake.body.forEach((part, index) => {
+            if (index === 0) {
+                part.move(snakeXPosition, snakeYPosition)
+            } else {
+                part.move(bodyXPositions[index -1], bodyYPositions[index -1])
+            }
+        })
     }
 
     clear () {

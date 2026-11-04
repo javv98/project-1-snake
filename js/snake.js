@@ -10,7 +10,7 @@ class Snake {
         this.vy = 0
 
         this.body = [] // El cuerpo se gestiona como un array
-        this.bodyLastX = 0 // variable para almacenar la x de la última celda del cuerpo
+        this.direction = "left" // Puede ser up, down, left o right, empieza siendo left
 
     }
 
@@ -20,26 +20,35 @@ class Snake {
     }
 
     move () {
+        this.changeDirection ()
         this.x += this.vx
+        this.y += this.vy
     }
 
-     /* Editarlo
-    firstSnake () { // Función que se ejecuta al principio para llenar el array inicial de serpiente con las celdas establecidas
+    // Función que se ejecuta al principio para llenar el array inicial de body con las celdas establecidas
+    firstBody () { 
         for (let i = 0; i < SNAKE_CELLS; i++) { // Hacemos un bucle para insertar las celdas
-            if (i === 0) {
-                this.snake.push(new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H)) // la primera se hace con los valores de las constantes
-                this.bodyLastX = this.snake[this.snake.length - 1].x
-            } else {
-                this.maxSnakeH() // Me llevo a una función el añadir más cuadrados a una snake
-            }
+           if (i === 0) {
+            this.maxSnakeH(this.x, this.y) // La primera dependerá de la posición de la cabeza
+           }  else {
+            this.maxSnakeH(this.body[this.body.length - 1].x, this.y) // Las siguientes dependerán de la posición de la última parte del body
+           }
         }
     } 
-      
-        // Función para darle una celda más al array de snake en línea recta
-    maxSnakeH () {
-        this.snake.push(new Snake (this.ctx, this.snakeLastX + CELL_SIZE, SNAKE_Y, SNAKE_W, SNAKE_H)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
-        this.snakeLastX = this.snake[this.snake.length - 1].x // actualizamos el valor de la última X a la última celda de snake creada
+    
+    // Función para darle una celda más al array de snake en línea recta
+    maxSnakeH (x, y) {
+        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
     }
-    */
+
+    changeDirection () {
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowUp" && (this.direction === "left" || this.direction === "right") ) {
+                this.vx = 0
+                this.vy = -CELL_SIZE
+                this.direction = "up"
+            }
+        })
+    }
 
 }
