@@ -49,7 +49,7 @@ class Game {
 
     // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero (me falta añadir cuando se come a si misma o )
     endGame () {
-        if (this.snake.x <= 0 || this.snake.x >= GAME_W + SNAKE_W || this.snake.y <= 0 || this.snake.y >= GAME_H - SNAKE_H) { // Cuando se choca con una pared
+        if (this.snake.x <= 0 || this.snake.x >= GAME_W - SNAKE_W || this.snake.y <= 0 || this.snake.y >= GAME_H - SNAKE_H) { // Cuando se choca con una pared
             clearInterval(this.intervalId)
         }
 

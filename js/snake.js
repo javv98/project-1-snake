@@ -49,6 +49,31 @@ class Snake {
                 this.direction = "up"
             }
         })
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowDown" && (this.direction === "left" || this.direction === "right") ) {
+                this.vx = 0
+                this.vy = CELL_SIZE
+                this.direction = "down"
+            }
+        })
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft" && (this.direction === "up" || this.direction === "down") ) {
+                this.vx = -CELL_SIZE
+                this.vy = 0
+                this.direction = "left"
+            }
+        })
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight" && (this.direction === "up" || this.direction === "down") ) {
+                this.vx = CELL_SIZE
+                this.vy = 0
+                this.direction = "right"
+            }
+        })
+        
     }
 
 }
