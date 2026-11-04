@@ -41,6 +41,19 @@ class Snake {
         this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
     }
 
+    //Función para chequear cuando la cabeza se choca con el cuerpo (tiene que ser un bucle porque tiene que chequear con todas las partes del cuerpo)
+    checkCollisions(body) {
+        let boolean = false
+        body.forEach ((part) => {
+            console.log(this, part)
+            if ((this.x === part.x) && (this.y === part.y)) { // Al moverse por bloques iguales, necesitamos que la cabeza entre en un bloque ocupado por el cuerpo.
+                boolean = true
+                return
+            }
+        })
+        return boolean
+    }
+
     changeDirection () {
         document.addEventListener("keydown", (event) => {
             if (event.key === "ArrowUp" && (this.direction === "left" || this.direction === "right") ) {
