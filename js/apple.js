@@ -5,6 +5,8 @@ class Apple {
         this.y = null
         this.w = w
         this.h = h
+
+        this.position = [{x: this.x, y: this.y}]
     }
 
     draw () { 
@@ -26,6 +28,7 @@ class Apple {
 
         this.x = randomX
         this.y = randomY
+        this.position = [{x: this.x, y: this.y}]
     }
 
     //Función para cuando choquemos con la manzana esta haga crecer al cuerpo y desaparezca

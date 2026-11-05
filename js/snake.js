@@ -42,7 +42,7 @@ class Snake {
     }
 
     //Función para chequear cuando la cabeza se choca con el cuerpo (tiene que ser un bucle porque tiene que chequear con todas las partes del cuerpo)
-    checkCollisions(body) {
+    collisions(body) { // RECIBE UN ARRAY DE OBJETOS
         let boolean = false
         body.forEach ((part) => {
             if ((this.x === part.x) && (this.y === part.y)) { // Al moverse por bloques iguales, necesitamos que la cabeza entre en un bloque ocupado por el cuerpo.

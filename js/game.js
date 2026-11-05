@@ -21,6 +21,7 @@ class Game {
         this.clear()
         this.move()
         this.draw()
+        this.checkCollisions()
         this.endGame()
         this.counter++
         }, 1000 / 5)
@@ -51,6 +52,7 @@ class Game {
             }
         })
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
+
         if (this.counter % APPLE_TIME === 0) {
           this.apple.randomPosition(this.positions) 
           this.counter = 0 
@@ -71,6 +73,16 @@ class Game {
 
     }
 
+    checkCollisions () {
+        // Checkea si se choca la cabeza con una manzana y la elimina para crear otra
+        if (this.snake.collisions(this.apple.position)) {
+            delete this.apple
+            this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
+            this.apple.randomPosition(this.positions) 
+            this.counter = 0 
+        }
+    }
+
     // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero o cuando se choca con una parte de su body
     endGame () {
         if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
@@ -81,7 +93,7 @@ class Game {
             clearInterval(this.intervalId)
         }
 
-        if (this.snake.checkCollisions(this.snake.body)) {
+        if (this.snake.collisions(this.snake.body)) {
             clearInterval(this.intervalId)
         }
     }
