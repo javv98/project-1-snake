@@ -15,7 +15,7 @@ class Snake {
     }
 
     draw () {
-            this.ctx.fillStyle = "red" 
+            this.ctx.fillStyle = "yellow" 
             this.ctx.fillRect(this.x, this.y, this.w, this.h)
     }
 
@@ -45,7 +45,6 @@ class Snake {
     checkCollisions(body) {
         let boolean = false
         body.forEach ((part) => {
-            console.log(this, part)
             if ((this.x === part.x) && (this.y === part.y)) { // Al moverse por bloques iguales, necesitamos que la cabeza entre en un bloque ocupado por el cuerpo.
                 boolean = true
                 return
