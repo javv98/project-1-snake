@@ -26,3 +26,7 @@ const ENEMY_W = CELL_SIZE
 const ENEMY_H = ENEMY_W
 const ENEMY_TIME = 20
 const ENEMY_DISSAPEARED = ENEMY_TIME + 20
+
+// Tamaño del marcador
+const SCOREBOARD_W = GAME_H / 4
+const SCOREBOARD_H = GAME_H

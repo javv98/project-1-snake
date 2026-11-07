@@ -1,6 +1,6 @@
 class Game {
     constructor () {
-        this.canvas = document.getElementById("canvas")
+        this.canvas = document.getElementById("game")
         this.canvas.width = GAME_W
         this.canvas.height = GAME_H
         this.ctx = this.canvas.getContext("2d")
@@ -9,6 +9,7 @@ class Game {
         this.intervalId = null
         
         this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
+        this.appleCount = 0
 
         this.enemy = null
 
@@ -18,6 +19,8 @@ class Game {
 
         this.enemyCreated = false // Para controlar que salga más tarde
         this.enemyIndex = 1
+
+        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length)
     }
 
     start () {
@@ -48,6 +51,8 @@ class Game {
             part.isTail(index, arr)
             part.draw()
         })
+
+        this.scoreboard.draw()
     }
 
     move () { //(ACTUALIZAR CON EL NUEVO this.positions)
@@ -95,6 +100,7 @@ class Game {
 
     clear () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.scoreboard.clear()
     }
 
     // Función para crear un array de arrays con las posiciones de la serpiente y su cuerpo
