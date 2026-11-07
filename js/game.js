@@ -53,6 +53,7 @@ class Game {
         })
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
 
+        // MOVE DE LA APPLE
         if (this.counter % APPLE_TIME === 0) {
           this.apple.randomPosition(this.positions) 
           this.counter = 0 
@@ -76,6 +77,7 @@ class Game {
     checkCollisions () {
         // Checkea si se choca la cabeza con una manzana y la elimina para crear otra
         if (this.snake.collisions(this.apple.position)) {
+            this.apple.getBigger(this.ctx, this.positions, this.snake.body)
             delete this.apple
             this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
             this.apple.randomPosition(this.positions) 

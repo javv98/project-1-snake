@@ -2,9 +2,9 @@
 const GAME_W = 500
 const GAME_H = GAME_W // El juego siempre tiene que ser cuadrado para que las cuadrículas salgan perfectas
 const GAME_GRID = 20 // Cuantas casillas en cada fila quiero que haya en el juego
-const CELL_SIZE = GAME_W / GAME_GRID //El tamaño de cada celda
+const CELL_SIZE = GAME_W / GAME_GRID // El tamaño de cada celda
 
-// Tamaño de la serpiente
+// Tamaño de cada trozo de la serpiente
 const SNAKE_W = CELL_SIZE // El tamaño mínimo de la serpiente será 1 casilla
 const SNAKE_H = GAME_H / GAME_GRID // El largo siempre será de una casilla
 const SNAKE_CELLS = 8 // Tamaño inicial de la serpiente en celdas

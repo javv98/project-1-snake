@@ -32,8 +32,16 @@ class Apple {
     }
 
     //Función para cuando choquemos con la manzana esta haga crecer al cuerpo y desaparezca
+    getBigger (ctx, positions, body) { // Recibe el array de posiciones y el array del cuerpo
+        let newPosition = null
+        positions.forEach((position, index) => {
+            if (index === positions.length - 1) {
+                newPosition = position
+            }
+        }) 
 
-    //Función para que desaparezca cuando hayan pasado 3 segundos
+        body.push(new Body (ctx, newPosition[0], newPosition[1], SNAKE_W, SNAKE_H))
+    }
 
 
 }
