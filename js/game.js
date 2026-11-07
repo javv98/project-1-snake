@@ -28,6 +28,7 @@ class Game {
         this.draw()
         this.checkCollisions()
         this.endGame()
+
         this.appleIndex++
         this.enemyIndex++
         }, 1000 / 5)
@@ -81,7 +82,7 @@ class Game {
         if (this.enemyCreated === true) {
             if (this.enemyIndex % ENEMY_DISSAPEARED === 0) {
                     this.enemyCreated = false
-                    this.enemyIndex = 0
+                    this.enemyIndex = 1
             }
         }
     }
@@ -112,6 +113,14 @@ class Game {
         }
 
         // ENEMIGO
+        if (this.enemyCreated === true) {
+            if (this.snake.collisions(this.enemy.position)) {
+                this.snake.body = this.enemy.deleteBody(this.snake.body)
+                delete this.enemy
+                this.enemyCreated = false
+                this.enemyIndex = 1
+        }
+        }
     }
 
     // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero o cuando se choca con una parte de su body
