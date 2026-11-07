@@ -12,11 +12,38 @@ class Snake {
         this.body = [] // El cuerpo se gestiona como un array
         this.direction = "left" // Puede ser up, down, left o right, empieza siendo left
 
+        this.head = new Image()
+        this.head.src = "imgs/snake/head.png"
+
+        this.head.xFrames = 4
+        this.head.yFrames = 4
+
+        this.head.xFrameIndex = 0
+        this.head.yFrameIndex = 2
+
+        this.head.onload = () => {
+            this.head.isReady = true
+
+            this.head.frameW = Math.floor(this.head.width / this.head.yFrames)
+            this.head.frameH = Math.floor(this.head.height / this.head.xFrames)
+        }
+
     }
 
     draw () {
-            this.ctx.fillStyle = "yellow" 
-            this.ctx.fillRect(this.x, this.y, this.w, this.h)
+        if (this.head.isReady) {
+            this.ctx.drawImage(
+                this.head,
+                this.head.frameW * this.head.xFrameIndex, 
+                this.head.frameH * this.head.yFrameIndex, 
+                this.head.frameW, 
+                this.head.frameH, 
+                this.x, 
+                this.y, 
+                this.w, 
+                this.h
+            )
+        }
     }
 
     move () {
@@ -59,6 +86,8 @@ class Snake {
                 this.vx = 0
                 this.vy = -CELL_SIZE
                 this.direction = "up"
+                this.head.xFrameIndex = 0
+                this.head.yFrameIndex = 0
             }
         })
 
@@ -67,6 +96,8 @@ class Snake {
                 this.vx = 0
                 this.vy = CELL_SIZE
                 this.direction = "down"
+                this.head.xFrameIndex = 0
+                this.head.yFrameIndex = 3
             }
         })
 
@@ -75,6 +106,8 @@ class Snake {
                 this.vx = -CELL_SIZE
                 this.vy = 0
                 this.direction = "left"
+                this.head.xFrameIndex = 0
+                this.head.yFrameIndex = 2
             }
         })
 
@@ -83,6 +116,8 @@ class Snake {
                 this.vx = CELL_SIZE
                 this.vy = 0
                 this.direction = "right"
+                this.head.xFrameIndex = 0
+                this.head.yFrameIndex = 1
             }
         })
         

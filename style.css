@@ -11,6 +11,8 @@ body {
 
 #canvas {
     border: 1px solid black;
+    background-image: url("imgs/bgs/20x20.png");
+    background-size: 100%;
 }
 
 #game {
