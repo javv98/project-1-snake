@@ -6,7 +6,7 @@ class Apple {
         this.w = w
         this.h = h
 
-        this.position = [{x: this.x, y: this.y}]
+        this.position = [{x: this.x, y: this.y}] // Lo necesitamos para el check collisions
     }
 
     draw () { 

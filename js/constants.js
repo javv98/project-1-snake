@@ -20,3 +20,9 @@ const SNAKE_VX = CELL_SIZE // La velocidad siempre estará relacionada con el ta
 const APPLE_W = CELL_SIZE
 const APPLE_H = APPLE_W
 const APPLE_TIME = 30
+
+// Tamaño del enemigo
+const ENEMY_W = CELL_SIZE
+const ENEMY_H = ENEMY_W
+const ENEMY_TIME = 20
+const ENEMY_DISSAPEARED = ENEMY_TIME + 20
