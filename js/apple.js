@@ -7,11 +7,13 @@ class Apple {
         this.h = h
 
         this.position = [{x: this.x, y: this.y}] // Lo necesitamos para el check collisions
+
+        this.skin = new Image ()
+        this.skin.src = "imgs/apple.png"
     }
 
     draw () { 
-        this.ctx.fillStyle = "red" 
-        this.ctx.fillRect(this.x, this.y, this.w, this.h)
+        this.ctx.drawImage(this.skin, this.x, this.y, this.w, this.h)
     }
 
     // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente. 

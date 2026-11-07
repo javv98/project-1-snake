@@ -7,11 +7,13 @@ class Enemy {
         this.h = h
         this.damage = damage
         this.position = [{x: this.x, y: this.y}] // Lo necesitamos para el check collisions
+
+        this.skin = new Image ()
+        this.skin.src = "imgs/enemy.png"
     }
 
     draw () {
-        this.ctx.fillStyle = "brown"
-        this.ctx.fillRect(this.x, this.y, this.w, this.h)
+        this.ctx.drawImage(this.skin, this.x, this.y, this.w, this.h)
     }
 
     // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente ni de la manzana. 
