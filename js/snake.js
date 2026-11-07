@@ -12,32 +12,32 @@ class Snake {
         this.body = [] // El cuerpo se gestiona como un array
         this.direction = "left" // Puede ser up, down, left o right, empieza siendo left
 
-        this.head = new Image()
-        this.head.src = "imgs/snake/head.png"
+        this.skin = new Image()
+        this.skin.src = "imgs/snake/head.png"
 
-        this.head.xFrames = 4
-        this.head.yFrames = 4
+        this.skin.columns = 4
+        this.skin.rows = 4
 
-        this.head.xFrameIndex = 0
-        this.head.yFrameIndex = 2
+        this.skin.columnIndex = 0
+        this.skin.rowIndex = 2
 
-        this.head.onload = () => {
-            this.head.isReady = true
+        this.skin.onload = () => {
+            this.skin.isReady = true
 
-            this.head.frameW = Math.floor(this.head.width / this.head.yFrames)
-            this.head.frameH = Math.floor(this.head.height / this.head.xFrames)
+            this.skin.frameW = Math.floor(this.skin.width / this.skin.rows)
+            this.skin.frameH = Math.floor(this.skin.height / this.skin.columns)
         }
 
     }
 
     draw () {
-        if (this.head.isReady) {
+        if (this.skin.isReady) {
             this.ctx.drawImage(
-                this.head,
-                this.head.frameW * this.head.xFrameIndex, 
-                this.head.frameH * this.head.yFrameIndex, 
-                this.head.frameW, 
-                this.head.frameH, 
+                this.skin,
+                this.skin.frameW * this.skin.columnIndex, 
+                this.skin.frameH * this.skin.rowIndex, 
+                this.skin.frameW, 
+                this.skin.frameH, 
                 this.x, 
                 this.y, 
                 this.w, 
@@ -86,8 +86,8 @@ class Snake {
                 this.vx = 0
                 this.vy = -CELL_SIZE
                 this.direction = "up"
-                this.head.xFrameIndex = 0
-                this.head.yFrameIndex = 0
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 0
             }
         })
 
@@ -96,8 +96,8 @@ class Snake {
                 this.vx = 0
                 this.vy = CELL_SIZE
                 this.direction = "down"
-                this.head.xFrameIndex = 0
-                this.head.yFrameIndex = 3
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 3
             }
         })
 
@@ -106,8 +106,8 @@ class Snake {
                 this.vx = -CELL_SIZE
                 this.vy = 0
                 this.direction = "left"
-                this.head.xFrameIndex = 0
-                this.head.yFrameIndex = 2
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 2
             }
         })
 
@@ -116,8 +116,8 @@ class Snake {
                 this.vx = CELL_SIZE
                 this.vy = 0
                 this.direction = "right"
-                this.head.xFrameIndex = 0
-                this.head.yFrameIndex = 1
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 1
             }
         })
         

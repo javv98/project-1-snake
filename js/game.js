@@ -25,8 +25,8 @@ class Game {
         this.intervalId = setInterval(() => {
         this.clear()
         this.move()
-        this.draw()
         this.checkCollisions()
+        this.draw()
         this.endGame()
 
         this.appleIndex++
@@ -36,16 +36,18 @@ class Game {
     }
 
     draw () {
-        this.snake.draw()
-        this.snake.body.forEach((part) => {
-            part.draw()
-        })
-
         this.apple.draw()
 
         if (this.enemyCreated) {
             this.enemy.draw()
         }
+
+        this.snake.draw()
+
+        this.snake.body.forEach((part, index, arr) => {
+            part.isTail(index, arr)
+            part.draw()
+        })
     }
 
     move () { //(ACTUALIZAR CON EL NUEVO this.positions)
@@ -53,14 +55,18 @@ class Game {
         // El move guarda primero la posición original de la serpiente y su cuerpo y luego mueve al resto del cuerpo en base a los valores anteriores
         let snakeXPosition = this.snake.x
         let snakeYPosition = this.snake.y
+        let snakeDirection = this.snake.direction
+
         let bodyXPositions = this.snake.body.map((part) => part.x)
         let bodyYPositions = this.snake.body.map((part) => part.y)
+        let bodyDirections = this.snake.body.map((part) => part.direction)
+
         this.snake.move()
         this.snake.body.forEach((part, index) => {
             if (index === 0) {
-                part.move(snakeXPosition, snakeYPosition)
+                part.move(snakeXPosition, snakeYPosition, snakeDirection)
             } else {
-                part.move(bodyXPositions[index -1], bodyYPositions[index -1]) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
+                part.move(bodyXPositions[index -1], bodyYPositions[index -1], bodyDirections[index -1] ) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
             }
         })
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
@@ -115,7 +121,7 @@ class Game {
         // ENEMIGO
         if (this.enemyCreated === true) {
             if (this.snake.collisions(this.enemy.position)) {
-                this.snake.body = this.enemy.deleteBody(this.snake.body)
+                this.enemy.deleteBody(this.snake.body)
                 delete this.enemy
                 this.enemyCreated = false
                 this.enemyIndex = 1

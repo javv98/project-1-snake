@@ -33,14 +33,6 @@ class Enemy {
 
     //Función para que cuando te choques con la manzana esta te elimine una parte del cuerpo según el damage del enemigo
     deleteBody (body) { // Recibe el array del cuerpo de la serpiente, un array de objetos
-        const filteredBody = body.filter((part, index) => {
-            if (index < (body.length - 1) - this.damage) {
-                return true
-            } else {
-                return false
-            }
-        })
-       
-        return filteredBody
+        body.splice(body.length - this.damage, this.damage)
     }
 }
