@@ -17,13 +17,13 @@ class Apple {
     }
 
     // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente. 
-    randomPosition (xyArray) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
+    randomPosition (xyArray, xEnemy = false, yEnemy = false) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
         // Primero genero un numero random entre 0 y el tamaño del juego en ambas direcciones
         let randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))
         let randomY = Math.floor(Math.random() * (GAME_H - CELL_SIZE))
 
         // Segundo compruebo que esa combinación no sea ninguna de las existentes en el cuerpo de la serpiente y que es múltiplo del tamaño de la casilla para que siempre esté bien posicionado
-        while ((xyArray.some((xy) => xy[0] === randomX && xy[1] === randomY)) || (randomX % CELL_SIZE !== 0 || randomY % CELL_SIZE !== 0)) {
+        while ((xyArray.some((xy) => xy[0] === randomX && xy[1] === randomY)) || (randomX % CELL_SIZE !== 0 || randomY % CELL_SIZE !== 0) || (randomX === xEnemy || randomY === yEnemy)) {
             randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))
             randomY = Math.floor(Math.random() * (GAME_H - CELL_SIZE))
         }

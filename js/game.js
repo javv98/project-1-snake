@@ -28,6 +28,8 @@ class Game {
         this.intervalId = setInterval(() => {
         this.clear()
         this.move()
+        this.create("apple")
+        this.create("enemy")
         this.checkCollisions()
         this.draw()
         this.endGame()
@@ -81,27 +83,52 @@ class Game {
             part.changeSprite(part.direction, arr, index)
         })
         this.scoreboard.body = this.snake.body.length
+    }
 
-        // MOVE DE LA APPLE
-        if (this.appleIndex % APPLE_TIME === 0) {
-            this.apple.randomPosition(this.positions) 
-            this.appleIndex = 0 
-        }
-
-        // MOVE DEL ENEMIGO (Aparece más tarde de iniciarse el juego)
+    create (thing, immediately) {
+        // CREATE DE LA APPLE
         if (this.enemyCreated === false) {
-            if (this.enemyIndex % ENEMY_TIME === 0) {
-                this.enemy = new Enemy (this.ctx, ENEMY_W, ENEMY_H)
-                this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y) 
-                this.enemyCreated = true
+            if (thing === "apple" && immediately === true) {
+                this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
+                this.apple.randomPosition(this.positions) 
+                this.appleIndex = 0 
+         } else {
+                if (this.appleIndex % APPLE_TIME === 0) {
+                        this.apple.randomPosition(this.positions) 
+                        this.appleIndex = 0 
+                    }
+            }
+        } else {
+
+            if (thing === "apple" && immediately === true) {
+                this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
+                this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y) 
+                this.appleIndex = 0 
+         } else {
+                if (this.appleIndex % APPLE_TIME === 0) {
+                        this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y)
+                        this.appleIndex = 0 
+                    }
             }
         }
-        if (this.enemyCreated === true) {
-            if (this.enemyIndex % ENEMY_DISSAPEARED === 0) {
-                    this.enemyCreated = false
-                    this.enemyIndex = 1
+        
+
+        // CREATE DEL ENEMIGO (Aparece más tarde de iniciarse el juego)
+        if (thing === "enemy") {
+            if (this.enemyCreated === false) {
+                if (this.enemyIndex % ENEMY_TIME === 0) {
+                    this.enemy = new Enemy (this.ctx, ENEMY_W, ENEMY_H)
+                    this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y) 
+                    this.enemyCreated = true
+                }
             }
-        }
+            if (this.enemyCreated === true) {
+                if (this.enemyIndex % ENEMY_DISSAPEARED === 0) {
+                        this.enemyCreated = false
+                        this.enemyIndex = 1
+                }
+            }
+        } 
     }
 
     clear () {
@@ -125,9 +152,7 @@ class Game {
         if (this.snake.collisions(this.apple.position)) {
             this.apple.getBigger(this.ctx, this.positions, this.snake.body)
             delete this.apple
-            this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
-            this.apple.randomPosition(this.positions) 
-            this.appleIndex = 0 
+            this.create("apple", true)
             this.appleCount++
             this.scoreboard.apples = this.appleCount
         }
