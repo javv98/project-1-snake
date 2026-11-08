@@ -75,6 +75,7 @@ class Game {
             }
         })
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
+        this.scoreboard.body = this.snake.body.length
 
         // MOVE DE LA APPLE
         if (this.appleIndex % APPLE_TIME === 0) {
@@ -122,6 +123,8 @@ class Game {
             this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
             this.apple.randomPosition(this.positions) 
             this.appleIndex = 0 
+            this.appleCount++
+            this.scoreboard.apples = this.appleCount
         }
 
         // ENEMIGO

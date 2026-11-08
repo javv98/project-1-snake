@@ -27,6 +27,15 @@ const ENEMY_H = ENEMY_W
 const ENEMY_TIME = 20
 const ENEMY_DISSAPEARED = ENEMY_TIME + 20
 
+// MARCADOR
 // Tamaño del marcador
 const SCOREBOARD_W = GAME_H / 4
 const SCOREBOARD_H = GAME_H
+
+// Posición marcador
+const SCORE_X = 10
+
+const TITLE_Y = 30
+const APPLES_Y = 60
+const BODY_Y = 90
+
