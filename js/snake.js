@@ -57,15 +57,17 @@ class Snake {
         for (let i = 0; i < SNAKE_CELLS; i++) { // Hacemos un bucle para insertar las celdas
            if (i === 0) {
             this.maxSnakeH(this.x, this.y) // La primera dependerá de la posición de la cabeza
-           }  else {
+           } else if (i === SNAKE_CELLS - 1) {
+            this.maxSnakeH(this.x, this.y, true)
+           } else {
             this.maxSnakeH(this.body[this.body.length - 1].x, this.y) // Las siguientes dependerán de la posición de la última parte del body
            }
         }
     } 
     
     // Función para darle una celda más al array de snake en línea recta
-    maxSnakeH (x, y) {
-        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
+    maxSnakeH (x, y, tail) {
+        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h, tail)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
     }
 
     //Función para chequear cuando la cabeza se choca con el cuerpo (tiene que ser un bucle porque tiene que chequear con todas las partes del cuerpo)

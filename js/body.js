@@ -1,5 +1,5 @@
 class Body {
-    constructor (ctx, x, y, w, h) {
+    constructor (ctx, x, y, w, h, tail = false) {
         this.ctx = ctx
         this.x = x
         this.y = y
@@ -8,7 +8,7 @@ class Body {
 
         this.direction = "left"
 
-        this.tail = false // Para pintar la cola, en el último será true
+        this.tail = tail // Para pintar la cola, en el último será true
 
         this.skin = new Image ()
         this.skin.src = "imgs/snake/body.png"
