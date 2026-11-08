@@ -67,14 +67,19 @@ class Game {
         let bodyDirections = this.snake.body.map((part) => part.direction)
 
         this.snake.move()
+
         this.snake.body.forEach((part, index) => {
             if (index === 0) {
-                part.move(snakeXPosition, snakeYPosition, snakeDirection)
+                part.move(snakeXPosition, snakeYPosition, snakeDirection, this.snake.body, index)
             } else {
-                part.move(bodyXPositions[index -1], bodyYPositions[index -1], bodyDirections[index -1] ) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
+                part.move(bodyXPositions[index -1], bodyYPositions[index -1], bodyDirections[index -1], this.snake.body, index) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
             }
         })
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
+
+        this.snake.body.forEach((part, index, arr) => {
+            part.changeSprite(part.direction, arr, index)
+        })
         this.scoreboard.body = this.snake.body.length
 
         // MOVE DE LA APPLE

@@ -49,46 +49,6 @@ class Body {
         this.y = y
         this.direction = direction
 
-        if (this.tail === false) {
-            switch (this.direction) {
-            case "up":
-                this.skin.columnIndex = 0
-                this.skin.rowIndex = 0
-                break;
-            case "down":
-                this.skin.columnIndex = 0
-                this.skin.rowIndex = 3
-                break;
-            case "left":
-                this.skin.columnIndex = 0
-                this.skin.rowIndex = 2
-            case "right":
-                this.skin.columnIndex = 0
-                this.skin.rowIndex = 1
-            }
-        }
-
-       if (this.tail === true) {
-            switch (this.direction) {
-            case "up":
-                this.skin.columnIndex = 3
-                this.skin.rowIndex = 0
-                break;
-            case "down":
-                this.skin.columnIndex = 3
-                this.skin.rowIndex = 3
-                break;
-            case "left":
-                this.skin.columnIndex = 3
-                this.skin.rowIndex = 2
-                break;
-            case "right":
-                this.skin.columnIndex = 3
-                this.skin.rowIndex = 1
-                break;
-            }
-        }
-        
     }
 
     isTail (index, bodyArr) {
@@ -98,4 +58,79 @@ class Body {
             this.tail = false
         }
     }
+
+    changeSprite (direction, arr, index) {
+        // Para giros
+         if (index < arr.length - 1 && this.direction !== arr[index + 1].direction) {
+            if (this.direction === "up" && arr[index + 1].direction === "left") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 2
+            } else if (this.direction === "up" && arr[index + 1].direction === "right") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 3
+            } else if (this.direction === "down" && arr[index + 1].direction === "left") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 0
+            } else if (this.direction === "down" && arr[index + 1].direction === "right") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 1
+            } else if (this.direction === "right" && arr[index + 1].direction === "up") {
+                this.skin.columnIndex = 2
+                this.skin.rowIndex = 2
+            } else if (this.direction === "right" && arr[index + 1].direction === "down") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 2
+            } else if (this.direction === "left" && arr[index + 1].direction === "up") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 1
+            } else if (this.direction === "left" && arr[index + 1].direction === "down") {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 3
+            }
+                
+        } else { // Para línea recta
+
+            if (this.tail === false) {
+                switch (direction) {
+                case "up":
+                    this.skin.columnIndex = 0
+                    this.skin.rowIndex = 0
+                    break;
+                case "down":
+                    this.skin.columnIndex = 0
+                    this.skin.rowIndex = 3
+                    break;
+                case "left":
+                    this.skin.columnIndex = 0
+                    this.skin.rowIndex = 2
+                case "right":
+                    this.skin.columnIndex = 0
+                    this.skin.rowIndex = 1
+                }
+            }
+
+            if (this.tail === true) {
+                switch (direction) {
+                case "up":
+                    this.skin.columnIndex = 3
+                    this.skin.rowIndex = 0
+                    break;
+                case "down":
+                    this.skin.columnIndex = 3
+                    this.skin.rowIndex = 3
+                    break;
+                case "left":
+                    this.skin.columnIndex = 3
+                    this.skin.rowIndex = 2
+                    break;
+                case "right":
+                    this.skin.columnIndex = 3
+                    this.skin.rowIndex = 1
+                    break;
+                }
+            }
+        }
+        
+    }
+
 }
