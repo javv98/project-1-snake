@@ -82,7 +82,6 @@ class Game {
         this.snake.body.forEach((part, index, arr) => {
             part.changeSprite(part.direction, arr, index)
         })
-        this.scoreboard.body = this.snake.body.length
     }
 
     create (thing, immediately) {
@@ -155,6 +154,7 @@ class Game {
             this.create("apple", true)
             this.appleCount++
             this.scoreboard.apples = this.appleCount
+            this.scoreboard.body = this.snake.body.length
         }
 
         // ENEMIGO
@@ -164,6 +164,7 @@ class Game {
                 delete this.enemy
                 this.enemyCreated = false
                 this.enemyIndex = 1
+                this.scoreboard.body = this.snake.body.length
         }
         }
     }
