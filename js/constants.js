@@ -33,9 +33,24 @@ const SCOREBOARD_W = GAME_H / 4
 const SCOREBOARD_H = GAME_H
 
 // Posición marcador
-const SCORE_X = 10
+const ALL_X = 10
 
-const TITLE_Y = 30
-const APPLES_Y = 60
-const BODY_Y = 90
+const TITLE_IMG_W = 86
+const TITLE_IMG_X = (SCOREBOARD_W / 2) - (TITLE_IMG_W / 2) // Para que esté en medio 
+const TITLE_IMG_Y = 10
+const TITLE_IMG_H = 30
+
+const APPLE_IMG_Y = 46
+const APPLE_IMG_W = 26
+const APPLE_IMG_H = APPLE_IMG_W
+
+const APPLES_TEXT_Y = APPLE_IMG_Y + 20
+const APPLES_TEXT_X = ALL_X + APPLE_IMG_W
+
+const BODY_IMG_Y = 90
+const BODY_IMG_H = 14
+const BODY_IMG_W = BODY_IMG_H * 2
+
+const BODY_TEXT_Y = BODY_IMG_Y + 12
+const BODY_TEXT_X = ALL_X + BODY_IMG_W + 2
 
