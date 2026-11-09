@@ -53,7 +53,7 @@ class Snake {
     }
 
     // Función que se ejecuta al principio para llenar el array inicial de body con las celdas establecidas
-    firstBody () { 
+    firstBody (scoreboard) { 
         for (let i = 0; i < SNAKE_CELLS; i++) { // Hacemos un bucle para insertar las celdas
            if (i === 0) {
             this.maxSnakeH(this.x, this.y) // La primera dependerá de la posición de la cabeza
@@ -63,6 +63,8 @@ class Snake {
             this.maxSnakeH(this.body[this.body.length - 1].x, this.y) // Las siguientes dependerán de la posición de la última parte del body
            }
         }
+
+        scoreboard.body = SNAKE_CELLS
     } 
     
     // Función para darle una celda más al array de snake en línea recta

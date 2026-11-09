@@ -24,7 +24,7 @@ class Game {
     }
 
     start () {
-        this.snake.firstBody()
+        this.snake.firstBody(this.scoreboard)
         this.intervalId = setInterval(() => {
         this.clear()
         this.move()
