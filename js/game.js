@@ -25,6 +25,8 @@ class Game {
 
     start () {
         this.snake.firstBody(this.scoreboard)
+        this.updatedPositions()
+        
         this.intervalId = setInterval(() => {
         this.clear()
         this.move()
@@ -59,22 +61,15 @@ class Game {
 
     move () { //(ACTUALIZAR CON EL NUEVO this.positions)
         // MOVE DE LA SNAKE 
-        // El move guarda primero la posición original de la serpiente y su cuerpo y luego mueve al resto del cuerpo en base a los valores anteriores
-        let snakeXPosition = this.snake.x
-        let snakeYPosition = this.snake.y
-        let snakeDirection = this.snake.direction
-
-        let bodyXPositions = this.snake.body.map((part) => part.x)
-        let bodyYPositions = this.snake.body.map((part) => part.y)
         let bodyDirections = this.snake.body.map((part) => part.direction)
 
         this.snake.move()
 
         this.snake.body.forEach((part, index) => {
             if (index === 0) {
-                part.move(snakeXPosition, snakeYPosition, snakeDirection, this.snake.body, index)
+                part.move(this.positions[index][0], this.positions[index][1], this.snake.direction, this.snake.body, index)
             } else {
-                part.move(bodyXPositions[index -1], bodyYPositions[index -1], bodyDirections[index -1], this.snake.body, index) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
+                part.move(this.positions[index][0], this.positions[index][1], bodyDirections[index -1], this.snake.body, index) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
             }
         })
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
