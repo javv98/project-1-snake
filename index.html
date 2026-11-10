@@ -8,8 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="canvas">
-        <canvas id="game"> </canvas>
+
+    <div id="startScreen">
+        <img src="imgs/title.png" alt="Snake logo">
+        
+        <div id="startInfo">
+            <p> Insert your name here ⬇️ </p>
+            <input id="nameInput" type="text" placeholder="Javier, for example..." maxlength="12"> <!-- Le pongo un máximo de caracteres para que no se me salga el nombre de la pantalla-->
+            <button id="startButton" type="button">START</button>
+        </div>
+        
+
+    </div>
+
+
+    <div id="canvas" class="stop">
+        <canvas id="game"></canvas>
         <canvas id="score"></canvas>
     </div>
     
@@ -21,5 +35,6 @@
     <script src="js/game.js"></script>
     <script src="js/score/scoreboard.js"></script>
     <script src="js/index.js"></script>
+
 </body>
 </html>

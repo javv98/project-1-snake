@@ -21,6 +21,7 @@ class Game {
         this.enemyIndex = 1
 
         this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length)
+
     }
 
     start () {
@@ -33,8 +34,9 @@ class Game {
         this.create("apple")
         this.create("enemy")
         this.checkCollisions()
-        this.draw()
         this.endGame()
+        
+        this.draw()
 
         this.appleIndex++
         this.enemyIndex++
@@ -168,6 +170,7 @@ class Game {
     endGame () {
         if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
             clearInterval(this.intervalId)
+
         }
 
         if (this.snake.body.length === 0) { // Cuando se queda sin elementos en el array body

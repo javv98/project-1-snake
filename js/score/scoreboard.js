@@ -5,6 +5,8 @@ class Scoreboard {
         this.canvas.height = SCOREBOARD_H
         this.ctx = this.canvas.getContext("2d")
 
+        this.namePlayer = document.querySelector("#nameInput").value.toUpperCase()
+
         this.apples = apples
         this.body = body
         this.maxScore = maxScore
@@ -29,6 +31,7 @@ class Scoreboard {
         this.bodyImg.onload = () => {
             this.bodyImg.isReady = true
         }
+
     }
 
     draw () {
@@ -51,6 +54,11 @@ class Scoreboard {
         }
 
         this.ctx.fillText(`: ${this.body}`, BODY_TEXT_X, BODY_TEXT_Y)
+
+        // Name
+        this.ctx.font = "10px 'Press Start 2P'"
+        this.ctx.fillText(`PLAYER:`, ALL_X, 460)
+        this.ctx.fillText(`${this.namePlayer}`, ALL_X, 480)
     }
 
     clear () {
