@@ -10,13 +10,13 @@ class Scoreboard {
         this.maxScore = maxScore
 
         this.scoreImg = new Image ()
-        this.scoreImg.src = "imgs/score.png"
+        this.scoreImg.src = "imgs/scoreboard/score.png"
 
         this.appleImg = new Image ()
         this.appleImg.src = "imgs/apple.png"
 
         this.bodyImg = new Image ()
-        this.bodyImg.src = "imgs/body_part.png"
+        this.bodyImg.src = "imgs/scoreboard/body_part.png"
 
         this.scoreImg.onload = () => {
             this.scoreImg.isReady = true

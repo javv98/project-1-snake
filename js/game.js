@@ -26,7 +26,7 @@ class Game {
     start () {
         this.snake.firstBody(this.scoreboard)
         this.updatedPositions()
-        
+
         this.intervalId = setInterval(() => {
         this.clear()
         this.move()
@@ -59,7 +59,7 @@ class Game {
         this.scoreboard.draw()
     }
 
-    move () { //(ACTUALIZAR CON EL NUEVO this.positions)
+    move () {
         // MOVE DE LA SNAKE 
         let bodyDirections = this.snake.body.map((part) => part.direction)
 
