@@ -166,19 +166,30 @@ class Game {
         }
     }
 
+    saveScore () {
+        if (+localStorage.getItem("score") < this.snake.body.length) {
+            localStorage.setItem("name", this.scoreboard.namePlayer)
+            localStorage.setItem("apples", this.appleCount.toString())
+            localStorage.setItem("score", this.snake.body.length.toString())
+        }
+    }
+
     // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero o cuando se choca con una parte de su body
     endGame () {
         if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
             clearInterval(this.intervalId)
+            this.saveScore()
 
         }
 
         if (this.snake.body.length === 0) { // Cuando se queda sin elementos en el array body
             clearInterval(this.intervalId)
+            this.saveScore()
         }
 
         if (this.snake.collisions(this.snake.body)) {
             clearInterval(this.intervalId)
+            this.saveScore()
         }
     }
 }

@@ -35,11 +35,13 @@ const SCOREBOARD_H = GAME_H
 // Posición marcador
 const ALL_X = 10
 
+// Imagen "Score"
 const TITLE_IMG_W = 86
 const TITLE_IMG_X = (SCOREBOARD_W / 2) - (TITLE_IMG_W / 2) // Para que esté en medio 
 const TITLE_IMG_Y = 10
 const TITLE_IMG_H = 30
 
+// Marcador manzanas
 const APPLE_IMG_Y = 46
 const APPLE_IMG_W = 26
 const APPLE_IMG_H = APPLE_IMG_W
@@ -47,10 +49,39 @@ const APPLE_IMG_H = APPLE_IMG_W
 const APPLES_TEXT_Y = APPLE_IMG_Y + 20
 const APPLES_TEXT_X = ALL_X + APPLE_IMG_W
 
+// Marcador tamaño snake
 const BODY_IMG_Y = 90
 const BODY_IMG_H = 14
 const BODY_IMG_W = BODY_IMG_H * 2
 
 const BODY_TEXT_Y = BODY_IMG_Y + 12
 const BODY_TEXT_X = ALL_X + BODY_IMG_W + 2
+
+// Marcador mejor puntuación
+const HIGHEST_SCORE_IMG_Y = 140
+const HIGHEST_SCORE_IMG_W = 86
+const HIGHEST_SCORE_IMG_X = (SCOREBOARD_W / 2) - (HIGHEST_SCORE_IMG_W / 2) // Para que esté en medio 
+const HIGHEST_SCORE_IMG_H = 30
+
+// Marcador mejor puntuación jugador
+const BEST_PLAYER_Y = 186
+
+// Marcador mejor puntuación manzanas
+const HIGHEST_APPLE_IMG_Y = 196
+const HIGHEST_APPLE_IMG_W = 26
+const HIGHEST_APPLE_IMG_H = HIGHEST_APPLE_IMG_W
+
+const HIGHEST_APPLES_TEXT_Y = HIGHEST_APPLE_IMG_Y + 20
+const HIGHEST_APPLES_TEXT_X = ALL_X + HIGHEST_APPLE_IMG_W
+
+// Marcador mejor puntuación snake
+const HIGHEST_BODY_IMG_Y = 240
+const HIGHEST_BODY_IMG_H = 14
+const HIGHEST_BODY_IMG_W = HIGHEST_BODY_IMG_H * 2
+
+const HIGHEST_BODY_TEXT_Y = HIGHEST_BODY_IMG_Y + 12
+const HIGHEST_BODY_TEXT_X = ALL_X + HIGHEST_BODY_IMG_W + 2
+
+// Jugador actual
+const PLAYER_Y = 460
 
