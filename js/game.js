@@ -21,7 +21,6 @@ class Game {
         this.enemyIndex = 1
 
         this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length)
-
     }
 
     start () {
@@ -176,20 +175,41 @@ class Game {
 
     // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero o cuando se choca con una parte de su body
     endGame () {
+
         if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
-            clearInterval(this.intervalId)
-            this.saveScore()
+            this.final()
 
         }
 
         if (this.snake.body.length === 0) { // Cuando se queda sin elementos en el array body
             clearInterval(this.intervalId)
-            this.saveScore()
+            this.final()
         }
 
         if (this.snake.collisions(this.snake.body)) {
             clearInterval(this.intervalId)
-            this.saveScore()
+            this.final()
         }
+    }
+
+    final () {
+        const startPage = document.querySelector("#startScreen")
+        const gameCanvas = document.querySelector("#canvas") 
+        const endPage = document.querySelector("#endScreen")
+
+        const playerScore = document.querySelector("#playerScore")
+        const appleScore = document.querySelector("#appleScore")
+        const lengthScore = document.querySelector("#lengthScore")
+
+        clearInterval(this.intervalId)
+
+        this.saveScore()
+        playerScore.textContent = `⬇ ${this.scoreboard.namePlayer}, this is your score ⬇`
+        appleScore.textContent = `: ${this.appleCount.toString()}`
+        lengthScore.textContent = `: ${this.snake.body.length.toString()}`
+
+        startPage.classList.add("stop")
+        gameCanvas.classList.add("stop")
+        endPage.classList.remove("stop")
     }
 }

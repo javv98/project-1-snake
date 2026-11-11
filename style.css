@@ -90,3 +90,59 @@ body {
 #canvas.stop {
     display: none;
 }
+
+/* Pantalla perder */
+
+#endScreen {
+    height: 500px;
+    width: 625px;
+    background-color: #c1cf9b;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+    border: 2px solid black;
+
+}
+
+#endScreen > img {
+    height: 100px;
+    width: 300px;
+}
+
+#endInfo {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: "Press Start 2P";
+}
+
+#endInfo button {
+    margin: 10px;
+    width: 200px;
+    padding: 20px;
+    background-color: #778a40;
+    font-family: "Press Start 2P";
+}
+
+#endScreen.stop {
+    display: none;
+}
+
+.results {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+#appleImg {
+    height: 46px;
+    width: 46px;
+}
+
+#bodyImg {
+    height: 24px;
+    width: 48px;
+}

@@ -13,9 +13,9 @@
         <img src="imgs/title.png" alt="Snake logo">
         
         <div id="startInfo">
-            <p> Insert your name here ⬇️ </p>
+            <p> Insert your name here ⬇ </p>
             <input id="nameInput" type="text" placeholder="Javier, for example..." maxlength="12"> <!-- Le pongo un máximo de caracteres para que no se me salga el nombre de la pantalla-->
-            <button id="startButton" type="button">START</button>
+            <button id="startButton" type="button" disabled>START</button>
         </div>
         
 
@@ -26,6 +26,22 @@
         <canvas id="game"></canvas>
         <canvas id="score"></canvas>
     </div>
+
+    <div id="endScreen" class="stop">
+        <img src="imgs/title.png" alt="Snake logo">
+        
+        <div id="endInfo">
+            <p id="playerScore"> ⬇ This is your score ⬇ </p>
+            <div class="results"> <img id="appleImg" src="imgs/apple.png" alt="apple"> <p id="appleScore"> 0 </p> </div> 
+            <div class="results"> <img id="bodyImg" src="imgs/scoreboard/body_part.png" alt="snake body"> <p id="lengthScore"> 0</p> </div>
+            <button id="restartButton" type="button">Try Again</button>
+            <button id="endButton" type="button">Close</button>
+        </div>
+        
+
+    </div>
+
+    
     
     <script src="js/constants.js"></script>
     <script src="js/elements/body.js"></script>
