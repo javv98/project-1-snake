@@ -4,22 +4,19 @@ const startButton = document.querySelector("#startButton")
 const restartButton = document.querySelector("#restartButton")
 const endButton = document.querySelector("#endButton")
 const input = document.querySelector("#nameInput")
-const letters = "abcdefghijklmnñopkrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
 
+// Comprueba que se haya introducido un nombre y que no sea un espacio en blanco 
 input.addEventListener("input", () => {
     if (input.value === "") {
-        startButton.setAttribute("disabled", "") 
+        startButton.setAttribute("disabled", "")
+        input.setAttribute("maxlength", "12")
+    } else if (input.value === " ") {
+        startButton.setAttribute("disabled", "")
+        input.setAttribute("maxlength", "1")
     } else {
-        let nombre = Array.from(input.value)
-        nombre.forEach((letter) => {
-        if (letters.includes(letter)) {
             startButton.removeAttribute("disabled")
-            } else {
-            startButton.setAttribute("disabled", "")
         }
     })
-    }
-})
 
 startButton.addEventListener("click", () => {
     startPage.classList.add("stop")
