@@ -7,7 +7,7 @@ const CELL_SIZE = GAME_W / GAME_GRID // El tamaño de cada celda
 // Tamaño de cada trozo de la serpiente
 const SNAKE_W = CELL_SIZE // El tamaño mínimo de la serpiente será 1 casilla
 const SNAKE_H = GAME_H / GAME_GRID // El largo siempre será de una casilla
-const SNAKE_CELLS = 8 // Tamaño inicial de la serpiente en celdas
+const SNAKE_CELLS = 399 // Tamaño inicial de la serpiente en celdas
 
 // Donde sale (siempre en medio)
 const SNAKE_X = GAME_W / 2 // Relacionar el tamaño del juego a la posición donde salga la serpiente, para que siempre salga a la mitad
@@ -16,16 +16,17 @@ const SNAKE_Y = GAME_H / 2 // Lo mismo
 //Velocidad de la serpiente
 const SNAKE_VX = CELL_SIZE // La velocidad siempre estará relacionada con el tamaño de la celda, para que se mueva exáctamente esos píxeles
 
-// Tamaño de la manzana
+// Manzana
 const APPLE_W = CELL_SIZE
 const APPLE_H = APPLE_W
 const APPLE_TIME = 30
 
-// Tamaño del enemigo
+// Enemigo
 const ENEMY_W = CELL_SIZE
 const ENEMY_H = ENEMY_W
 const ENEMY_TIME = 20
 const ENEMY_DISSAPEARED = ENEMY_TIME + 20
+const ENEMY_MAXCELLS = 25 // Número en el que si quedan menos de estas celdas libres el enemigo ya no sale
 
 // MARCADOR
 // Tamaño del marcador

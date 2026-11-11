@@ -39,7 +39,7 @@ class Game {
 
         this.appleIndex++
         this.enemyIndex++
-        }, 1000 / 5)
+        }, 1000 / 6)
 
     }
 
@@ -82,45 +82,55 @@ class Game {
 
     create (thing, immediately) {
         // CREATE DE LA APPLE
-        if (this.enemyCreated === false) {
-            if (thing === "apple" && immediately === true) {
-                this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
-                this.apple.randomPosition(this.positions) 
-                this.appleIndex = 0 
-         } else {
-                if (this.appleIndex % APPLE_TIME === 0) {
+        if (thing === "apple") {
+            if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) {
+                    return
+            } else {
+                if (this.enemyCreated === false) {
+                    if (immediately === true) {
+                        this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
                         this.apple.randomPosition(this.positions) 
                         this.appleIndex = 0 
+                    } else {
+                        if (this.appleIndex % APPLE_TIME === 0) {
+                            this.apple.randomPosition(this.positions) 
+                            this.appleIndex = 0 
+                        }
                     }
-            }
-        } else {
-
-            if (thing === "apple" && immediately === true) {
-                this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
-                this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y) 
-                this.appleIndex = 0 
-         } else {
-                if (this.appleIndex % APPLE_TIME === 0) {
-                        this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y)
+                } else {
+                    if (immediately === true) {
+                        this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
+                        this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y,) 
                         this.appleIndex = 0 
+                    } else {
+                        if (this.appleIndex % APPLE_TIME === 0) {
+                            this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y)
+                            this.appleIndex = 0 
+                        }
                     }
-            }
-        }
-        
+                }         
+            } 
+        }  
 
+        
         // CREATE DEL ENEMIGO (Aparece más tarde de iniciarse el juego)
         if (thing === "enemy") {
-            if (this.enemyCreated === false) {
-                if (this.enemyIndex % ENEMY_TIME === 0) {
-                    this.enemy = new Enemy (this.ctx, ENEMY_W, ENEMY_H)
-                    this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y) 
-                    this.enemyCreated = true
+            if (this.snake.body.length > (GAME_GRID * GAME_GRID) - 25) { // No me lo crea si quedan menos de 25 huecos libres en el tablero (lo comprobamos con el tamaño de la serpiente)
+                return
+            } else {
+
+                if (this.enemyCreated === false) {
+                    if (this.enemyIndex % ENEMY_TIME === 0) {
+                        this.enemy = new Enemy (this.ctx, ENEMY_W, ENEMY_H)
+                        this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y, this.snake.body) 
+                        this.enemyCreated = true
+                    }
                 }
-            }
-            if (this.enemyCreated === true) {
-                if (this.enemyIndex % ENEMY_DISSAPEARED === 0) {
-                        this.enemyCreated = false
-                        this.enemyIndex = 1
+                if (this.enemyCreated === true) {
+                    if (this.enemyIndex % ENEMY_DISSAPEARED === 0) {
+                            this.enemyCreated = false
+                            this.enemyIndex = 1
+                    }
                 }
             }
         } 

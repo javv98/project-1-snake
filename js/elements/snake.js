@@ -28,6 +28,7 @@ class Snake {
             this.skin.frameH = Math.floor(this.skin.height / this.skin.columns)
         }
 
+        this.isChanging = false // Para checkear que si ya has dado una vez para moverte no puedas dar otra vez hasta que no pase a la siguiente vuelta. 
     }
 
     draw () {
@@ -50,6 +51,7 @@ class Snake {
         this.changeDirection ()
         this.x += this.vx
         this.y += this.vy
+        this.isChanging = false
     }
 
     // Función que se ejecuta al principio para llenar el array inicial de body con las celdas establecidas
@@ -86,45 +88,48 @@ class Snake {
 
     changeDirection () {
         document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowUp" && (this.direction === "left" || this.direction === "right") ) {
+            if (event.key === "ArrowUp" && (this.direction === "left" || this.direction === "right") && (this.isChanging === false)) {
                 this.vx = 0
                 this.vy = -CELL_SIZE
                 this.direction = "up"
                 this.skin.columnIndex = 0
                 this.skin.rowIndex = 0
+                this.isChanging = true
             }
         })
 
         document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowDown" && (this.direction === "left" || this.direction === "right") ) {
+            if (event.key === "ArrowDown" && (this.direction === "left" || this.direction === "right") && (this.isChanging === false) ) {
                 this.vx = 0
                 this.vy = CELL_SIZE
                 this.direction = "down"
                 this.skin.columnIndex = 0
                 this.skin.rowIndex = 3
+                this.isChanging = true
             }
         })
 
         document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowLeft" && (this.direction === "up" || this.direction === "down") ) {
+            if (event.key === "ArrowLeft" && (this.direction === "up" || this.direction === "down") && (this.isChanging === false) ) {
                 this.vx = -CELL_SIZE
                 this.vy = 0
                 this.direction = "left"
                 this.skin.columnIndex = 0
                 this.skin.rowIndex = 2
+                this.isChanging = true
             }
         })
 
         document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowRight" && (this.direction === "up" || this.direction === "down") ) {
+            if (event.key === "ArrowRight" && (this.direction === "up" || this.direction === "down") && (this.isChanging === false) ) {
                 this.vx = CELL_SIZE
                 this.vy = 0
                 this.direction = "right"
                 this.skin.columnIndex = 0
                 this.skin.rowIndex = 1
+                this.isChanging = true
             }
         })
-        
     }
 
 }
