@@ -146,3 +146,40 @@ body {
     height: 24px;
     width: 48px;
 }
+
+/* Pantalla ganar */
+
+#winScreen {
+    height: 500px;
+    width: 625px;
+    background-color: #c1cf9b;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+    border: 2px solid black;
+}
+
+#winScreen img {
+    height: auto;
+    width: 600px;
+}
+
+#winButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Press Start 2P";
+}
+
+#winButtons button {
+    margin: 10px;
+    width: 200px;
+    padding: 20px;
+    background-color: #778a40;
+    font-family: "Press Start 2P";
+}
+
+#winScreen.stop {
+    display: none;
+}

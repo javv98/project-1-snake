@@ -39,7 +39,7 @@ class Game {
 
         this.appleIndex++
         this.enemyIndex++
-        }, 1000 / 6)
+        }, 1000 / 4)
 
     }
 
@@ -185,25 +185,30 @@ class Game {
 
     // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero o cuando se choca con una parte de su body
     endGame () {
-
+        // Perder
         if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
-            this.final()
+            this.lose()
 
         }
 
         if (this.snake.body.length === 0) { // Cuando se queda sin elementos en el array body
             clearInterval(this.intervalId)
-            this.final()
+            this.lose()
         }
 
         if (this.snake.collisions(this.snake.body)) {
             clearInterval(this.intervalId)
-            this.final()
+            this.lose()
         }
+
+        // Ganar
+        if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) { // - 1 porque la cabeza ocupa espacio pero no cuenta en el cuerpo 
+            clearInterval(this.intervalId)
+            this.win() 
+        } 
     }
 
-    final () {
-        const startPage = document.querySelector("#startScreen")
+    lose () {
         const gameCanvas = document.querySelector("#canvas") 
         const endPage = document.querySelector("#endScreen")
 
@@ -211,15 +216,25 @@ class Game {
         const appleScore = document.querySelector("#appleScore")
         const lengthScore = document.querySelector("#lengthScore")
 
-        clearInterval(this.intervalId)
-
         this.saveScore()
         playerScore.textContent = `⬇ ${this.scoreboard.namePlayer}, this is your score ⬇`
         appleScore.textContent = `: ${this.appleCount.toString()}`
         lengthScore.textContent = `: ${this.snake.body.length.toString()}`
 
-        startPage.classList.add("stop")
         gameCanvas.classList.add("stop")
         endPage.classList.remove("stop")
+    }
+
+    win () {
+        const gameCanvas = document.querySelector("#canvas")
+        const winPage = document.querySelector("#winScreen")
+        const winnerName = document.querySelector("#winnerName")
+
+        this.saveScore()
+        winnerName.textContent = `${this.scoreboard.namePlayer}, do you wanna...`
+
+        gameCanvas.classList.add("stop")
+        winPage.classList.remove("stop")
+
     }
 }

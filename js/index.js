@@ -1,8 +1,8 @@
 const startPage = document.querySelector("#startScreen")
 const gameCanvas = document.querySelector("#canvas")
 const startButton = document.querySelector("#startButton")
-const restartButton = document.querySelector("#restartButton")
-const endButton = document.querySelector("#endButton")
+const restartButton = document.querySelectorAll("#restartButton")
+const endButton = document.querySelectorAll("#endButton")
 const input = document.querySelector("#nameInput")
 
 // Comprueba que se haya introducido un nombre y que no sea un espacio en blanco 
@@ -26,10 +26,14 @@ startButton.addEventListener("click", () => {
     game.start()
 })
 
-restartButton.addEventListener("click", (() => {
+restartButton.forEach((button) => {
+    button.addEventListener("click", (() => {
     window.location.reload()
 }))
+})
 
-endButton.addEventListener("click", (() => {
+endButton.forEach((button) => {
+    button.addEventListener("click", (() => {
     window.close()
 }))
+})
