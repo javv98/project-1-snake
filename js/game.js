@@ -15,12 +15,15 @@ class Game {
 
         this.positions = [] // array con las posiciones actualizadas de todos los elementos, tanto snake [0] como el body (resto de índices)
 
+        this.appleCreated = true
         this.appleIndex = 0
 
         this.enemyCreated = false // Para controlar que salga más tarde
         this.enemyIndex = 1
 
         this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length)
+
+        this.isReady = false
     }
 
     start () {
@@ -36,6 +39,7 @@ class Game {
         this.endGame()
         
         this.draw()
+        this.loadGame()
 
         this.appleIndex++
         this.enemyIndex++
@@ -44,7 +48,9 @@ class Game {
     }
 
     draw () {
-        this.apple.draw()
+        if (this.appleCreated) {
+            this.apple.draw()
+        }
 
         if (this.enemyCreated) {
             this.enemy.draw()
@@ -82,8 +88,9 @@ class Game {
 
     create (thing, immediately) {
         // CREATE DE LA APPLE
-        if (thing === "apple") {
+        if (thing === "apple" && this.appleCreated === true) {
             if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) {
+                    this.appleCreated = false
                     return
             } else {
                 if (this.enemyCreated === false) {
@@ -156,6 +163,7 @@ class Game {
         // Checkea si se choca la cabeza con una manzana y la elimina para crear otra
         if (this.snake.collisions(this.apple.position)) {
             this.apple.getBigger(this.ctx, this.positions, this.snake.body)
+            appleSound.play()
             delete this.apple
             this.create("apple", true)
             this.appleCount++
@@ -167,6 +175,7 @@ class Game {
         if (this.enemyCreated === true) {
             if (this.snake.collisions(this.enemy.position)) {
                 this.enemy.deleteBody(this.snake.body)
+                enemySound.play()
                 delete this.enemy
                 this.enemyCreated = false
                 this.enemyIndex = 1
@@ -187,6 +196,7 @@ class Game {
     endGame () {
         // Perder
         if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
+            clearInterval(this.intervalId)
             this.lose()
 
         }
@@ -217,6 +227,9 @@ class Game {
         const lengthScore = document.querySelector("#lengthScore")
 
         this.saveScore()
+        gameSound.pause()
+        loseSound.play()
+
         playerScore.textContent = `⬇ ${this.scoreboard.namePlayer}, this is your score ⬇`
         appleScore.textContent = `: ${this.appleCount.toString()}`
         lengthScore.textContent = `: ${this.snake.body.length.toString()}`
@@ -231,10 +244,22 @@ class Game {
         const winnerName = document.querySelector("#winnerName")
 
         this.saveScore()
+        gameSound.pause()
+        winSound.play()
+
         winnerName.textContent = `${this.scoreboard.namePlayer}, do you wanna...`
 
         gameCanvas.classList.add("stop")
         winPage.classList.remove("stop")
 
+    }
+
+    loadGame () {
+        if (this.isReady === false) {
+            startPage.classList.add("stop")
+            gameCanvas.classList.remove("stop")
+            gameSound.play()
+            this.isReady = true
+        }
     }
 }

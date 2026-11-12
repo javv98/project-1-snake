@@ -19,16 +19,19 @@ input.addEventListener("input", () => {
     })
 
 startButton.addEventListener("click", () => {
-    startPage.classList.add("stop")
-    gameCanvas.classList.remove("stop")
-    
+    startSound.play()
+
     const game = new Game ()
     game.start()
+
 })
 
 restartButton.forEach((button) => {
     button.addEventListener("click", (() => {
-    window.location.reload()
+    restartSound.play()
+    restartSound.addEventListener("ended", (() => { // Cuando termina de reproducirse el audio, se reinicia
+        window.location.reload()
+    }))
 }))
 })
 

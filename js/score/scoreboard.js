@@ -64,28 +64,39 @@ class Scoreboard {
         this.ctx.fillText(`: ${this.body}`, BODY_TEXT_X, BODY_TEXT_Y)
 
         // BEST SCORE
+
         // Title
         if (this.recordImg.isReady === true) {
             this.ctx.drawImage(this.recordImg, HIGHEST_SCORE_IMG_X, HIGHEST_SCORE_IMG_Y, HIGHEST_SCORE_IMG_W, HIGHEST_SCORE_IMG_H)
         }
 
-        // Name
-        this.ctx.font = "8px 'Press Start 2P'"
-        this.ctx.fillText(`${localStorage.getItem("name")}`, ALL_X, BEST_PLAYER_Y)
 
-        // Apples
-        this.ctx.font = "14px sans-serif";
-        if (this.appleImg.isReady === true) {
-            this.ctx.drawImage(this.appleImg, ALL_X, HIGHEST_APPLE_IMG_Y, HIGHEST_APPLE_IMG_W, HIGHEST_APPLE_IMG_H)
+        if (localStorage.length === 0) { // Compruebo si hay datos guardados o no
+            // First Message
+            this.ctx.font = "8px 'Press Start 2P'"
+            this.ctx.fillText(`NO RECORD YET!`, ALL_X, BEST_PLAYER_Y)
+            
+        } else {
+
+            // Name
+            this.ctx.font = "8px 'Press Start 2P'"
+            this.ctx.fillText(`${localStorage.getItem("name")}`, ALL_X, BEST_PLAYER_Y)
+
+            // Apples
+            this.ctx.font = "14px sans-serif";
+            if (this.appleImg.isReady === true) {
+                this.ctx.drawImage(this.appleImg, ALL_X, HIGHEST_APPLE_IMG_Y, HIGHEST_APPLE_IMG_W, HIGHEST_APPLE_IMG_H)
+            }
+            this.ctx.fillText(`: ${localStorage.getItem("apples")}`, HIGHEST_APPLES_TEXT_X, HIGHEST_APPLES_TEXT_Y)
+
+            // Body
+            if (this.bodyImg.isReady === true) {
+                this.ctx.drawImage(this.bodyImg, ALL_X, HIGHEST_BODY_IMG_Y, HIGHEST_BODY_IMG_W, HIGHEST_BODY_IMG_H)
+            }
+
+            this.ctx.fillText(`: ${localStorage.getItem("score")}`, HIGHEST_BODY_TEXT_X, HIGHEST_BODY_TEXT_Y)
+  
         }
-        this.ctx.fillText(`: ${localStorage.getItem("apples")}`, HIGHEST_APPLES_TEXT_X, HIGHEST_APPLES_TEXT_Y)
-
-        // Body
-        if (this.bodyImg.isReady === true) {
-            this.ctx.drawImage(this.bodyImg, ALL_X, HIGHEST_BODY_IMG_Y, HIGHEST_BODY_IMG_W, HIGHEST_BODY_IMG_H)
-        }
-
-        this.ctx.fillText(`: ${localStorage.getItem("score")}`, HIGHEST_BODY_TEXT_X, HIGHEST_BODY_TEXT_Y)
 
         // CURRENT NAME
         this.ctx.font = "8px 'Press Start 2P'"

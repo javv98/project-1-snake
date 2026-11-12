@@ -86,3 +86,26 @@ const HIGHEST_BODY_TEXT_X = ALL_X + HIGHEST_BODY_IMG_W + 2
 // Jugador actual
 const PLAYER_Y = 460
 
+// AUDIOS
+
+const startSound = new Audio ("sounds/startButton.mp3")
+startSound.volume = 0.6
+
+const gameSound = new Audio ("sounds/game.mp3")
+gameSound.loop = true
+gameSound.volume = 0.1
+
+const appleSound = new Audio ("sounds/apple.mp3")
+appleSound.volume = 0.6
+
+const enemySound = new Audio ("sounds/enemy.mp3")
+enemySound.volume = 0.6
+
+const loseSound = new Audio ("sounds/lose.mp3")
+loseSound.volume = 0.2
+
+const winSound = new Audio ("sounds/win.mp3")
+winSound.volume = 0.6
+
+const restartSound = new Audio ("sounds/restart.mp3")
+restartSound.volume = 0.2
