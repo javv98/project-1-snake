@@ -132,4 +132,66 @@ class Snake {
         })
     }
 
+    eatApple (apple) { // Recibe el objeto manzana actual
+        // En la casilla de antes abre la boca
+        if (this.direction === "up") {
+
+            if (apple.y === this.y - CELL_SIZE && apple.x === this.x) {
+                this.skin.columnIndex = 3
+                this.skin.rowIndex = 0
+            } else if (apple.y === this.y && apple.x === this.x) {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 0
+            } else {
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 0
+            }
+        }
+
+        if (this.direction === "down") {
+
+            if (apple.y === this.y + CELL_SIZE && apple.x === this.x) {
+                this.skin.columnIndex = 3
+                this.skin.rowIndex = 3
+            } else if (apple.y === this.y && apple.x === this.x) {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 3
+            } else {
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 3
+            }
+        }
+
+        if (this.direction === "left") {
+
+            if (apple.x === this.x - CELL_SIZE && apple.y === this.y) {
+                this.skin.columnIndex = 3
+                this.skin.rowIndex = 2
+            } else if (apple.x === this.x && apple.y === this.y) {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 2
+            } else {
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 2
+            }
+        }
+
+        if (this.direction === "right") {
+
+            if (apple.x === this.x + CELL_SIZE && apple.y === this.y) {
+                this.skin.columnIndex = 3
+                this.skin.rowIndex = 1
+            } else if (apple.x === this.x && apple.y === this.y) {
+                this.skin.columnIndex = 1
+                this.skin.rowIndex = 1
+            } else {
+                this.skin.columnIndex = 0
+                this.skin.rowIndex = 1
+            }
+        }
+
+        // En la casilla misma casilla se llena la boca 
+
+    }
+
 }

@@ -79,6 +79,7 @@ class Game {
                 part.move(this.positions[index][0], this.positions[index][1], bodyDirections[index -1], this.snake.body, index) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
             }
         })
+        this.snake.eatApple(this.apple)
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
 
         this.snake.body.forEach((part, index, arr) => {
