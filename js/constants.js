@@ -116,3 +116,6 @@ winSound.volume = 0.6
 
 const restartSound = new Audio ("sounds/restart.mp3")
 restartSound.volume = 0.2
+
+const difficultySound = new Audio ("sounds/difficultyButtons.mp3")
+difficultySound.volume = 0.4

@@ -1,9 +1,11 @@
 class Game {
-    constructor () {
+    constructor (difficulty) {
         this.canvas = document.getElementById("game")
         this.canvas.width = GAME_W
         this.canvas.height = GAME_H
         this.ctx = this.canvas.getContext("2d")
+
+        this.difficulty = difficulty
 
         this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H)
         this.intervalId = null
@@ -43,7 +45,7 @@ class Game {
 
         this.appleIndex++
         this.enemyIndex++
-        }, 1000 / 5)
+        }, 1000 / this.difficulty)
 
     }
 

@@ -29,17 +29,20 @@ startButton.addEventListener("click", () => {
 })
 
 easyButton.addEventListener("click", () => {
-    const game = new Game ()
+    difficultySound.play()
+    const game = new Game (4)
     game.start()
 })
 
 mediumButton.addEventListener("click", () => {
-    const game = new Game ()
+    difficultySound.play()
+    const game = new Game (6)
     game.start()
 })
 
 hardButton.addEventListener("click", () => {
-    const game = new Game ()
+    difficultySound.play()
+    const game = new Game (8)
     game.start()
 })
     
