@@ -43,7 +43,7 @@ class Game {
 
         this.appleIndex++
         this.enemyIndex++
-        }, 1000 / 4)
+        }, 1000 / 5)
 
     }
 
@@ -175,15 +175,18 @@ class Game {
         // ENEMIGO
         if (this.enemyCreated === true) {
             if (this.snake.collisions(this.enemy.position)) {
-                this.enemy.deleteBody(this.snake.body)
+
+                this.snake.body = this.enemy.deleteBody(this.snake.body)
                 enemySound.play()
                 delete this.enemy
+
                 this.enemyCreated = false
                 this.enemyIndex = 1
                 this.scoreboard.body = this.snake.body.length
                 this.snake.lifes--
                 this.scoreboard.lifes = this.snake.lifes
-        }
+
+            }
         }
     }
 

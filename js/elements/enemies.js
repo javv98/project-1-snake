@@ -18,7 +18,7 @@ class Enemy {
 
     // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente ni de la manzana. 
     randomPosition (xyBodyArray, xApple, yApple) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
-        
+
         // Luego genero un numero random entre 0 y el tamaño del juego en ambas direcciones
         let randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))
         let randomY = Math.floor(Math.random() * (GAME_H - CELL_SIZE))
@@ -36,6 +36,6 @@ class Enemy {
 
     //Función para que cuando te choques con la manzana esta te elimine una parte del cuerpo según el damage del enemigo
     deleteBody (body) { // Recibe el array del cuerpo de la serpiente, un array de objetos
-        body.splice(body.length - this.damage, this.damage)
+        return body.filter((part, index) => index < body.length - this.damage)
     }
 }
