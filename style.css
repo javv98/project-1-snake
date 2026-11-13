@@ -87,6 +87,10 @@ body {
     align-items: center;
 }
 
+#howToPlay span {
+    color: green;
+}
+
 .instruction {
     display: flex;
     flex-direction: row;
