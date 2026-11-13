@@ -267,7 +267,7 @@ class Game {
 
     loadGame () {
         if (this.isReady === false) {
-            startPage.classList.add("stop")
+            instructions.classList.add("stop")
             gameCanvas.classList.remove("stop")
             gameSound.play()
             this.isReady = true

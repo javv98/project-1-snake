@@ -66,6 +66,76 @@ body {
 #startScreen.stop {
     display: none;
 }
+/* Pantalla instrucciones */
+
+#instructions {
+    font-family: "Press Start 2P";
+    height: 500px;
+    width: 625px;
+    background-color: #c1cf9b;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+    border: 2px solid black;
+}
+
+#howToPlay {
+    font-size: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.instruction {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+}
+
+.instruction img {
+    height: auto;
+    width: 80px;
+    border: 2px solid black
+}
+
+.instruction p {
+    width: 380px;
+    padding-left: 20px;
+}
+
+#levelSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#levelSelection p {
+    font-size: 0.8rem;
+}
+
+#levelButtons button {
+    font-family: "Press Start 2P";
+    padding: 20px;
+}
+
+#levelButtons .easy {
+    background-color: #778a40;  
+}
+
+#levelButtons .medium {
+    background-color: #da8224;  
+}
+
+#levelButtons .hard {
+    background-color: #cb1d09;  
+}
+
+#instructions.stop {
+    display: none;
+}
+
 
 /* Juego */
 #canvas {
