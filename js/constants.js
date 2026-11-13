@@ -83,6 +83,13 @@ const HIGHEST_BODY_IMG_W = HIGHEST_BODY_IMG_H * 2
 const HIGHEST_BODY_TEXT_Y = HIGHEST_BODY_IMG_Y + 12
 const HIGHEST_BODY_TEXT_X = ALL_X + HIGHEST_BODY_IMG_W + 2
 
+// Corazones
+const HEARTS_TEXT_Y = 390
+const HEARTS_Y = 400
+const HEARTS_W = 20
+const HEARTS_H = HEARTS_W
+
+
 // Jugador actual
 const PLAYER_Y = 460
 

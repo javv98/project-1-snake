@@ -1,5 +1,5 @@
 class Scoreboard {
-    constructor (apples, body, maxScore) {
+    constructor (apples, body, lifes) {
         this.canvas = document.getElementById("score")
         this.canvas.width = SCOREBOARD_W
         this.canvas.height = SCOREBOARD_H
@@ -9,34 +9,41 @@ class Scoreboard {
 
         this.apples = apples
         this.body = body
-        this.maxScore = maxScore
+        this.lifes = lifes
 
         this.scoreImg = new Image ()
         this.scoreImg.src = "imgs/scoreboard/score.png"
-
-        this.appleImg = new Image ()
-        this.appleImg.src = "imgs/apple.png"
-
-        this.bodyImg = new Image ()
-        this.bodyImg.src = "imgs/scoreboard/body_part.png"
-
-        this.recordImg = new Image ()
-        this.recordImg.src = "imgs/scoreboard/record.png"
 
         this.scoreImg.onload = () => {
             this.scoreImg.isReady = true
         }
 
+        this.appleImg = new Image ()
+        this.appleImg.src = "imgs/apple.png"
+
         this.appleImg.onload = () => {
             this.appleImg.isReady = true
         }
+
+        this.bodyImg = new Image ()
+        this.bodyImg.src = "imgs/scoreboard/body_part.png"
 
         this.bodyImg.onload = () => {
             this.bodyImg.isReady = true
         }
 
+        this.recordImg = new Image ()
+        this.recordImg.src = "imgs/scoreboard/record.png"
+
         this.recordImg.onload = () => {
             this.recordImg.isReady = true
+        }
+
+        this.heartImg = new Image ()
+        this.heartImg.src = "imgs/scoreboard/heart.png"
+
+        this.heartImg.onload = () => {
+            this.heartImg.isReady = true
         }
 
     }
@@ -97,6 +104,20 @@ class Scoreboard {
             this.ctx.fillText(`: ${localStorage.getItem("score")}`, HIGHEST_BODY_TEXT_X, HIGHEST_BODY_TEXT_Y)
   
         }
+
+        // LIFES
+
+        if (this.heartImg.isReady === true) {
+            let sumX = 0
+
+            this.ctx.font = "8px 'Press Start 2P'"
+            this.ctx.fillText(`LIVES`, ALL_X, HEARTS_TEXT_Y)
+            for (let i = 0; i < this.lifes; i++) {
+                this.ctx.drawImage(this.heartImg, ALL_X + sumX, HEARTS_Y, HEARTS_W, HEARTS_H)
+                sumX += HEARTS_W * 1.2
+            }
+        }
+
 
         // CURRENT NAME
         this.ctx.font = "8px 'Press Start 2P'"

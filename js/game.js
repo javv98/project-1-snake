@@ -21,7 +21,7 @@ class Game {
         this.enemyCreated = false // Para controlar que salga más tarde
         this.enemyIndex = 1
 
-        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length)
+        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.snake.lifes)
 
         this.isReady = false
     }
@@ -181,6 +181,8 @@ class Game {
                 this.enemyCreated = false
                 this.enemyIndex = 1
                 this.scoreboard.body = this.snake.body.length
+                this.snake.lifes--
+                this.scoreboard.lifes = this.snake.lifes
         }
         }
     }
@@ -208,6 +210,11 @@ class Game {
         }
 
         if (this.snake.collisions(this.snake.body)) {
+            clearInterval(this.intervalId)
+            this.lose()
+        }
+
+        if (this.snake.lifes === 0) {
             clearInterval(this.intervalId)
             this.lose()
         }
