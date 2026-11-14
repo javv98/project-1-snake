@@ -7,21 +7,24 @@ class Game {
 
         this.difficulty = difficulty
 
-        this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H)
         this.intervalId = null
+
+        this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H)
         
         this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
         this.appleCount = 0
-
-        this.enemy = null
-
-        this.positions = [] // array con las posiciones actualizadas de todos los elementos, tanto snake [0] como el body (resto de índices)
-
         this.appleCreated = true
         this.appleIndex = 0
 
+        this.enemy = null
         this.enemyCreated = false // Para controlar que salga más tarde
         this.enemyIndex = 1
+
+       /* this.goldenHeart = null
+        this.goldenHeartCreated = false
+        this.goldenHeartIndex = 1 */
+
+        this.positions = [] // array con las posiciones actualizadas de todos los elementos, tanto snake [0] como el body (resto de índices)
 
         this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.snake.lifes)
 
@@ -33,23 +36,36 @@ class Game {
         this.updatedPositions()
 
         this.intervalId = setInterval(() => {
-        this.clear()
-        this.move()
-        this.create("apple")
-        this.create("enemy")
-        this.checkCollisions()
-        this.endGame()
-        
-        this.draw()
-        this.loadGame()
+            this.clear()
+            this.move()
 
-        this.appleIndex++
-        this.enemyIndex++
+            this.create("apple")
+            this.create("enemy")
+            this.create("goldenHeart")
+
+            this.checkCollisions()
+            this.endGame()
+            
+            this.draw()
+            this.loadGame()
+
+            this.appleIndex++
+            this.enemyIndex++
+
         }, 1000 / this.difficulty)
 
     }
 
     draw () {
+
+        this.snake.draw()
+
+        this.snake.body.forEach((part, index, arr) => {
+            part.isTail(index, arr)
+            part.changeSprite(arr, index)
+            part.draw()
+        })
+
         if (this.appleCreated) {
             this.apple.draw()
         }
@@ -58,12 +74,9 @@ class Game {
             this.enemy.draw()
         }
 
-        this.snake.draw()
-
-        this.snake.body.forEach((part, index, arr) => {
-            part.isTail(index, arr)
-            part.draw()
-        })
+        /*if (this.goldenHeartCreated) {
+            this.goldenHeart.draw()
+        } */
 
         this.scoreboard.draw()
     }
@@ -83,10 +96,6 @@ class Game {
         })
         this.snake.eatApple(this.apple)
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
-
-        this.snake.body.forEach((part, index, arr) => {
-            part.changeSprite(part.direction, arr, index)
-        })
     }
 
     create (thing, immediately) {
@@ -144,6 +153,12 @@ class Game {
                 }
             }
         } 
+
+        // CREATE DE LA APPLE (Aparece solo cuando tienes menos vidas de las máximas)
+
+       /* if (thing === "goldenHeart") {
+            if ()
+        } */
     }
 
     clear () {
@@ -165,7 +180,7 @@ class Game {
         // MANZANA
         // Checkea si se choca la cabeza con una manzana y la elimina para crear otra
         if (this.snake.collisions(this.apple.position)) {
-            this.apple.getBigger(this.ctx, this.positions, this.snake.body)
+            this.snake.body.push(this.apple.getBigger(this.ctx, this.positions, this.snake.body))
             appleSound.play()
             delete this.apple
             this.create("apple", true)
@@ -187,7 +202,6 @@ class Game {
                 this.scoreboard.body = this.snake.body.length
                 this.snake.lifes--
                 this.scoreboard.lifes = this.snake.lifes
-
             }
         }
     }
@@ -196,7 +210,7 @@ class Game {
         if (+localStorage.getItem("score") < this.snake.body.length) {
             localStorage.setItem("name", this.scoreboard.namePlayer)
             localStorage.setItem("apples", this.appleCount.toString())
-            localStorage.setItem("score", this.snake.body.length.toString())
+            localStorage.setItem("score", this.scoreboard.body.toString())
         }
     }
 
@@ -245,7 +259,7 @@ class Game {
 
         playerScore.textContent = `⬇ ${this.scoreboard.namePlayer}, this is your score ⬇`
         appleScore.textContent = `: ${this.appleCount.toString()}`
-        lengthScore.textContent = `: ${this.snake.body.length.toString()}`
+        lengthScore.textContent = `: ${this.scoreboard.body.toString()}`
 
         gameCanvas.classList.add("stop")
         endPage.classList.remove("stop")

@@ -1,31 +1,33 @@
+const skin = new Image ()
+skin.src = "imgs/snake/body.png"
+
+skin.columns = 4
+skin.rows = 4
+
+skin.columnIndex = 0
+skin.rowIndex = 2
+
+skin.onload = () => {
+            skin.isReady = true
+
+            skin.frameW = Math.floor(skin.width / skin.columns)
+            skin.frameH = Math.floor(skin.height / skin.rows)
+        }
+
 class Body {
-    constructor (ctx, x, y, w, h, tail = false) {
+
+    constructor (ctx, x, y, w, h, tail = false, direction = "left") {
         this.ctx = ctx
         this.x = x
         this.y = y
         this.w = w
         this.h = h
 
-        this.direction = "left"
+        this.direction = direction
 
         this.tail = tail // Para pintar la cola, en el último será true
 
-        this.skin = new Image ()
-        this.skin.src = "imgs/snake/body.png"
-
-        this.skin.columns = 4
-        this.skin.rows = 4
-
-        this.skin.columnIndex = 0
-        this.skin.rowIndex = 2
-
-        this.skin.onload = () => {
-            this.skin.isReady = true
-
-            this.skin.frameW = Math.floor(this.skin.width / this.skin.columns)
-            this.skin.frameH = Math.floor(this.skin.height / this.skin.rows)
-        }
-
+        this.skin = skin
     }
 
     draw () {
@@ -59,7 +61,7 @@ class Body {
         }
     }
 
-    changeSprite (direction, arr, index) {
+    changeSprite (arr, index) {
         // Para giros
          if (index < arr.length - 1 && this.direction !== arr[index + 1].direction) {
             if (this.direction === "up" && arr[index + 1].direction === "left") {
@@ -91,7 +93,7 @@ class Body {
         } else { // Para línea recta
 
             if (this.tail === false) {
-                switch (direction) {
+                switch (this.direction) {
                 case "up":
                     this.skin.columnIndex = 0
                     this.skin.rowIndex = 0
@@ -110,7 +112,7 @@ class Body {
             }
 
             if (this.tail === true) {
-                switch (direction) {
+                switch (this.direction) {
                 case "up":
                     this.skin.columnIndex = 3
                     this.skin.rowIndex = 0

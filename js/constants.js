@@ -28,6 +28,13 @@ const ENEMY_TIME = 20
 const ENEMY_DISSAPEARED = ENEMY_TIME + 20
 const ENEMY_MAXCELLS = 25 // Número en el que si quedan menos de estas celdas libres el enemigo ya no sale
 
+// Corazón dorado
+const GOLDENH_W = CELL_SIZE
+const GOLDENH_H = GOLDENH_W
+
+const GOLDENH_TIME = 20
+const GOLDENH_DISSAPEARED = GOLDENH_TIME + 20
+
 // MARCADOR
 // Tamaño del marcador
 const SCOREBOARD_W = GAME_H / 4
