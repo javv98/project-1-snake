@@ -129,3 +129,6 @@ restartSound.volume = 0.2
 
 const difficultySound = new Audio ("sounds/difficultyButtons.mp3")
 difficultySound.volume = 0.4
+
+const healAudio = new Audio ("sounds/heal.mp3")
+healAudio.volume = 0.4

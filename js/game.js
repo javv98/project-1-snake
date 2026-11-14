@@ -214,6 +214,7 @@ class Game {
         if (this.goldenHeartCreated) {
             if (this.snake.collisions(this.goldenHeart.position)) {
                 this.snake.lives = this.goldenHeart.heal(this.snake.lives)
+                healAudio.play()
                 delete this.goldenHeart
                 this.goldenHeartCreated = false
                 this.goldenHeartIndex = 0

@@ -91,6 +91,10 @@ body {
     color: green;
 }
 
+#howToPlay span.golden {
+    color: #b8960b;
+}
+
 .instruction {
     display: flex;
     flex-direction: row;
