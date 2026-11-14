@@ -8,11 +8,11 @@ skin.columnIndex = 0
 skin.rowIndex = 2
 
 skin.onload = () => {
-            skin.isReady = true
+    skin.isReady = true
 
-            skin.frameW = Math.floor(skin.width / skin.columns)
-            skin.frameH = Math.floor(skin.height / skin.rows)
-        }
+    skin.frameW = Math.floor(skin.width / skin.columns)
+    skin.frameH = Math.floor(skin.height / skin.rows)
+}
 
 class Body {
 

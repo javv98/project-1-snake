@@ -12,7 +12,8 @@ class Snake {
         this.body = [] // El cuerpo se gestiona como un array
         this.direction = "left" // Puede ser up, down, left o right, empieza siendo left
 
-        this.lifes = 3
+        this.lives = SNAKE_LIVES
+
 
         this.skin = new Image()
         this.skin.src = "imgs/snake/head.png"

@@ -16,6 +16,9 @@ const SNAKE_Y = GAME_H / 2 // Lo mismo
 //Velocidad de la serpiente
 const SNAKE_VX = CELL_SIZE // La velocidad siempre estará relacionada con el tamaño de la celda, para que se mueva exáctamente esos píxeles
 
+//Vidas de la serpiente
+const SNAKE_LIVES = 3
+
 // Manzana
 const APPLE_W = CELL_SIZE
 const APPLE_H = APPLE_W

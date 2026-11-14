@@ -20,13 +20,13 @@ class Game {
         this.enemyCreated = false // Para controlar que salga más tarde
         this.enemyIndex = 1
 
-       /* this.goldenHeart = null
+        this.goldenHeart = null
         this.goldenHeartCreated = false
-        this.goldenHeartIndex = 1 */
+        this.goldenHeartIndex = 1
 
         this.positions = [] // array con las posiciones actualizadas de todos los elementos, tanto snake [0] como el body (resto de índices)
 
-        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.snake.lifes)
+        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.snake.lives)
 
         this.isReady = false
     }
@@ -52,6 +52,10 @@ class Game {
             this.appleIndex++
             this.enemyIndex++
 
+            if (this.snake.lives !== SNAKE_LIVES) {
+                this.goldenHeartIndex++
+            }
+
         }, 1000 / this.difficulty)
 
     }
@@ -74,9 +78,9 @@ class Game {
             this.enemy.draw()
         }
 
-        /*if (this.goldenHeartCreated) {
+        if (this.goldenHeartCreated) {
             this.goldenHeart.draw()
-        } */
+        }
 
         this.scoreboard.draw()
     }
@@ -102,32 +106,19 @@ class Game {
         // CREATE DE LA APPLE
         if (thing === "apple" && this.appleCreated === true) {
             if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) {
-                    this.appleCreated = false
-                    return
+                this.appleCreated = false
+                return
             } else {
-                if (this.enemyCreated === false) {
-                    if (immediately === true) {
-                        this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
-                        this.apple.randomPosition(this.positions) 
-                        this.appleIndex = 0 
-                    } else {
-                        if (this.appleIndex % APPLE_TIME === 0) {
-                            this.apple.randomPosition(this.positions) 
-                            this.appleIndex = 0 
-                        }
-                    }
+                if (immediately === true) {
+                    this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
+                    this.apple.randomPosition(this.positions, this.enemyCreated ? this.enemy.x : "", this.enemyCreated ? this.enemy.y : "", this.goldenHeartCreated ? this.goldenHeart.x : "", this.goldenHeartCreated ? this.goldenHeart.y : "") 
+                    this.appleIndex = 0 
                 } else {
-                    if (immediately === true) {
-                        this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
-                        this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y,) 
+                    if (this.appleIndex % APPLE_TIME === 0) {
+                        this.apple.randomPosition(this.positions, this.enemyCreated ? this.enemy.x : "", this.enemyCreated ? this.enemy.y : "", this.goldenHeartCreated ? this.goldenHeart.x : "", this.goldenHeartCreated ? this.goldenHeart.y : "")
                         this.appleIndex = 0 
-                    } else {
-                        if (this.appleIndex % APPLE_TIME === 0) {
-                            this.apple.randomPosition(this.positions, this.enemy.x, this.enemy.y)
-                            this.appleIndex = 0 
-                        }
                     }
-                }         
+                }
             } 
         }  
 
@@ -141,7 +132,7 @@ class Game {
                 if (this.enemyCreated === false) {
                     if (this.enemyIndex % ENEMY_TIME === 0) {
                         this.enemy = new Enemy (this.ctx, ENEMY_W, ENEMY_H)
-                        this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y, this.snake.body) 
+                        this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y, this.goldenHeartCreated ? this.goldenHeart.x : "", this.goldenHeartCreated ? this.goldenHeart.y : "") 
                         this.enemyCreated = true
                     }
                 }
@@ -156,9 +147,23 @@ class Game {
 
         // CREATE DE LA APPLE (Aparece solo cuando tienes menos vidas de las máximas)
 
-       /* if (thing === "goldenHeart") {
-            if ()
-        } */
+       if (thing === "goldenHeart") {
+            if (this.snake.lives === SNAKE_LIVES) {
+                return
+            } else {
+                if (this.goldenHeartIndex % GOLDENH_TIME === 0) {
+                    this.goldenHeart = new GoldenHeart (this.ctx, GOLDENH_W, GOLDENH_W)
+                    this.goldenHeart.randomPosition(this.positions, this.apple.x, this.apple.y, this.enemyCreated ? this.enemy.x : "", this.enemyCreated ? this.enemy.y : "")
+                    this.goldenHeartCreated = true
+                }
+
+                if (this.goldenHeartIndex % GOLDENH_DISSAPEARED === 0) {
+                    delete this.goldenHeart
+                    this.goldenHeartCreated = false
+                    this.goldenHeartIndex = 0
+                }
+            }
+        }
     }
 
     clear () {
@@ -190,7 +195,7 @@ class Game {
         }
 
         // ENEMIGO
-        if (this.enemyCreated === true) {
+        if (this.enemyCreated) {
             if (this.snake.collisions(this.enemy.position)) {
 
                 this.snake.body = this.enemy.deleteBody(this.snake.body)
@@ -200,8 +205,19 @@ class Game {
                 this.enemyCreated = false
                 this.enemyIndex = 1
                 this.scoreboard.body = this.snake.body.length
-                this.snake.lifes--
-                this.scoreboard.lifes = this.snake.lifes
+                this.snake.lives--
+                this.scoreboard.lifes = this.snake.lives
+            }
+        }
+
+        // GOLDER HEART
+        if (this.goldenHeartCreated) {
+            if (this.snake.collisions(this.goldenHeart.position)) {
+                this.snake.lives = this.goldenHeart.heal(this.snake.lives)
+                delete this.goldenHeart
+                this.goldenHeartCreated = false
+                this.goldenHeartIndex = 0
+                this.scoreboard.lifes = this.snake.lives
             }
         }
     }
@@ -233,7 +249,7 @@ class Game {
             this.lose()
         }
 
-        if (this.snake.lifes === 0) {
+        if (this.snake.lives === 0) {
             clearInterval(this.intervalId)
             this.lose()
         }
