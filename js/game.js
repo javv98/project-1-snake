@@ -148,7 +148,9 @@ class Game {
         // CREATE DE LA APPLE (Aparece solo cuando tienes menos vidas de las máximas)
 
        if (thing === "goldenHeart") {
-            if (this.snake.lives === SNAKE_LIVES) {
+            if (this.snake.body.length > ((GAME_GRID * GAME_GRID) - 10)) {
+                return
+            } else if (this.snake.lives === SNAKE_LIVES) {
                 return
             } else {
                 if (this.goldenHeartIndex % GOLDENH_TIME === 0) {
