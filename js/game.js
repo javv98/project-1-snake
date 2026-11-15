@@ -9,7 +9,7 @@ class Game {
         this.color = color
 
         this.intervalId = null
-        this.fps = this.level === "easy" ? 4 : this.level === "medium" ? 6 : 8
+        this.fps = this.level === "easy" ? EASY_SPEED : this.level === "medium" ? MEDIUM_SPEED : HARD_SPEED
 
         this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H, this.color, this.level)
         
@@ -139,7 +139,7 @@ class Game {
             } else {
 
                 if (this.enemyCreated === false) {
-                    if (this.enemyIndex % ENEMY_TIME === 0) {
+                    if (this.enemyIndex % ENEMY_TIME === 0 && this.enemyCreated === false) {
                         this.enemy = new Enemy (this.ctx, ENEMY_W, ENEMY_H)
                         this.enemy.randomPosition(this.positions, this.apple.x, this.apple.y, this.goldenHeartCreated ? this.goldenHeart.x : "", this.goldenHeartCreated ? this.goldenHeart.y : "") 
                         this.enemyCreated = true
@@ -162,7 +162,7 @@ class Game {
             } else if (this.snake.lives === SNAKE_LIVES) {
                 return
             } else {
-                if (this.goldenHeartIndex % GOLDENH_TIME === 0) {
+                if (this.goldenHeartIndex % GOLDENH_TIME === 0 && this.goldenHeartCreated === false) {
                     this.goldenHeart = new GoldenHeart (this.ctx, GOLDENH_W, GOLDENH_W)
                     this.goldenHeart.randomPosition(this.positions, this.apple.x, this.apple.y, this.enemyCreated ? this.enemy.x : "", this.enemyCreated ? this.enemy.y : "")
                     this.goldenHeartCreated = true

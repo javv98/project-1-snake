@@ -4,6 +4,11 @@ const GAME_H = GAME_W // El juego siempre tiene que ser cuadrado para que las cu
 const GAME_GRID = 20 // Cuantas casillas en cada fila quiero que haya en el juego
 const CELL_SIZE = GAME_W / GAME_GRID // El tamaño de cada celda
 
+// Velocidades
+const EASY_SPEED = 4
+const MEDIUM_SPEED = 5
+const HARD_SPEED = 6
+
 // Tamaño de cada trozo de la serpiente
 const SNAKE_W = CELL_SIZE // El tamaño mínimo de la serpiente será 1 casilla
 const SNAKE_H = GAME_H / GAME_GRID // El largo siempre será de una casilla
@@ -22,13 +27,13 @@ const SNAKE_LIVES = 3
 // Manzana
 const APPLE_W = CELL_SIZE
 const APPLE_H = APPLE_W
-const APPLE_TIME = 30
+const APPLE_TIME = 40
 
 // Enemigo
 const ENEMY_W = CELL_SIZE
 const ENEMY_H = ENEMY_W
 const ENEMY_TIME = 20
-const ENEMY_DISSAPEARED = ENEMY_TIME + 20
+const ENEMY_DISSAPEARED = ENEMY_TIME + 40
 const ENEMY_MAXCELLS = 25 // Número en el que si quedan menos de estas celdas libres el enemigo ya no sale
 
 // Corazón dorado
@@ -36,7 +41,7 @@ const GOLDENH_W = CELL_SIZE
 const GOLDENH_H = GOLDENH_W
 
 const GOLDENH_TIME = 20
-const GOLDENH_DISSAPEARED = GOLDENH_TIME + 20
+const GOLDENH_DISSAPEARED = GOLDENH_TIME + 40
 
 // MARCADOR
 // Tamaño del marcador
