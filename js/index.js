@@ -15,6 +15,7 @@ const blueButton = document.querySelector(".blue")
 const levelSelection = document.querySelector("#levelSelection")
 
 let color = ""
+let level = ""
 
 // Comprueba que se haya introducido un nombre y que no sea un espacio en blanco 
 input.addEventListener("input", () => {
@@ -58,19 +59,22 @@ blueButton.addEventListener("click", () => {
 
 easyButton.addEventListener("click", () => {
     difficultySound.play()
-    const game = new Game (4, color)
+    level = "easy"
+    const game = new Game (level, color)
     game.start()
 })
 
 mediumButton.addEventListener("click", () => {
     difficultySound.play()
-    const game = new Game (6, color)
+    level = "medium"
+    const game = new Game (level, color)
     game.start()
 })
 
 hardButton.addEventListener("click", () => {
     difficultySound.play()
-    const game = new Game (8, color)
+    level = "hard"
+    const game = new Game (level, color)
     game.start()
 })
     

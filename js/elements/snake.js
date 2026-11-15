@@ -1,11 +1,12 @@
 class Snake {
-    constructor (ctx, x, y, w, h, color) {
+    constructor (ctx, x, y, w, h, color, level) {
         this.ctx = ctx
         this.x = x
         this.y = y
         this.w = w
         this.h = h
         this.color = color
+        this.level = level
 
         this.vx = -CELL_SIZE // Siempre inicia yéndose para la derecha, en dirección a la cabeza
         this.vy = 0
@@ -13,7 +14,9 @@ class Snake {
         this.body = [] // El cuerpo se gestiona como un array
         this.direction = "left" // Puede ser up, down, left o right, empieza siendo left
 
-        this.lives = SNAKE_LIVES
+        if (this.level === "hard") {
+            this.lives = SNAKE_LIVES
+        }
 
         this.skin = new Image()
 
@@ -146,7 +149,7 @@ class Snake {
         })
     }
 
-    eatApple (apple) { // Recibe el objeto manzana actual
+    eatAppleSprite (apple) { // Recibe el objeto manzana actual
         // En la casilla de antes abre la boca
         if (this.direction === "up") {
 
@@ -203,9 +206,6 @@ class Snake {
                 this.skin.rowIndex = 1
             }
         }
-
-        // En la casilla misma casilla se llena la boca 
-
     }
 
 }

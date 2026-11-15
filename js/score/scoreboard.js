@@ -1,5 +1,5 @@
 class Scoreboard {
-    constructor (apples, body, lifes) {
+    constructor (apples, body, level, lifes = null) {
         this.canvas = document.getElementById("score")
         this.canvas.width = SCOREBOARD_W
         this.canvas.height = SCOREBOARD_H
@@ -9,7 +9,11 @@ class Scoreboard {
 
         this.apples = apples
         this.body = body
-        this.lifes = lifes
+        this.level = level
+
+        if (this.level === "hard") {
+            this.lifes = lifes
+        }
 
         this.scoreImg = new Image ()
         this.scoreImg.src = "imgs/scoreboard/score.png"
@@ -107,7 +111,8 @@ class Scoreboard {
 
         // LIFES
 
-        if (this.heartImg.isReady === true) {
+        if (this.level === "hard") {
+            if (this.heartImg.isReady === true) {
             let sumX = 0
 
             this.ctx.font = "8px 'Press Start 2P'"
@@ -116,6 +121,7 @@ class Scoreboard {
                 this.ctx.drawImage(this.heartImg, ALL_X + sumX, HEARTS_Y, HEARTS_W, HEARTS_H)
                 sumX += HEARTS_W * 1.2
             }
+        }
         }
 
 

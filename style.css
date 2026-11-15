@@ -196,6 +196,10 @@ button:hover:enabled {
     display: none;
 }
 
+#levelButtons {
+    position: relative;
+}
+
 #levelButtons button {
     font-family: "Press Start 2P";
     padding: 20px;
@@ -203,6 +207,56 @@ button:hover:enabled {
 
 #levelButtons .easy {
     background-color: #778a40;  
+}
+
+#levelButtons .medium {
+    background-color: #da8224;  
+}
+
+#levelButtons .hard {
+    background-color: #cb1d09;  
+}
+
+.features {
+    font-family: "Press Start 2P";
+    font-size: 0.6rem;
+    width: 200px;
+    height: 60px;
+    background-color: #72950c;
+    border: 2px solid black;
+}
+
+#easyFeatures { 
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0%;
+}
+
+#mediumFeatures { 
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 22%;
+}
+
+#hardFeatures { 
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+}
+
+#levelButtons .easy:hover + #easyFeatures { 
+    display: block;
+}
+
+#levelButtons .medium:hover + #mediumFeatures { 
+    display: block;
+}
+
+#levelButtons .hard:hover + #hardFeatures { 
+    display: block;
 }
 
 #levelButtons .medium {

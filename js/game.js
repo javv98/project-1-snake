@@ -1,16 +1,17 @@
 class Game {
-    constructor (difficulty, color) {
+    constructor (level, color) {
         this.canvas = document.getElementById("game")
         this.canvas.width = GAME_W
         this.canvas.height = GAME_H
         this.ctx = this.canvas.getContext("2d")
 
-        this.difficulty = difficulty
+        this.level = level
         this.color = color
 
         this.intervalId = null
+        this.fps = this.level === "easy" ? 4 : this.level === "medium" ? 6 : 8
 
-        this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H, this.color)
+        this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H, this.color, this.level)
         
         this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
         this.appleCount = 0
@@ -27,7 +28,7 @@ class Game {
 
         this.positions = [] // array con las posiciones actualizadas de todos los elementos, tanto snake [0] como el body (resto de índices)
 
-        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.snake.lives)
+        this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.level, this.level === "hard" ? this.snake.lives : "")
 
         this.isReady = false
     }
@@ -41,8 +42,13 @@ class Game {
             this.move()
 
             this.create("apple")
-            this.create("enemy")
-            this.create("goldenHeart")
+            if (this.level === "medium" || this.level === "hard") {
+                this.create("enemy")
+            }
+
+            if (this.level === "hard") {
+                this.create("goldenHeart")
+            }
 
             this.checkCollisions()
             this.endGame()
@@ -51,13 +57,15 @@ class Game {
             this.loadGame()
 
             this.appleIndex++
-            this.enemyIndex++
+            if (this.level === "medium" || this.level === "hard") {
+                this.enemyIndex++
+            }
 
-            if (this.snake.lives !== SNAKE_LIVES) {
+            if (this.snake.lives !== SNAKE_LIVES && this.level === "hard") {
                 this.goldenHeartIndex++
             }
 
-        }, 1000 / this.difficulty)
+        }, 1000 / this.fps)
 
     }
 
@@ -99,7 +107,7 @@ class Game {
                 part.move(this.positions[index][0], this.positions[index][1], bodyDirections[index -1], this.snake.body, index) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
             }
         })
-        this.snake.eatApple(this.apple)
+        this.snake.eatAppleSprite(this.apple)
         this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
     }
 
@@ -208,8 +216,11 @@ class Game {
                 this.enemyCreated = false
                 this.enemyIndex = 1
                 this.scoreboard.body = this.snake.body.length
-                this.snake.lives--
-                this.scoreboard.lifes = this.snake.lives
+
+                if (this.level === "hard") {
+                    this.snake.lives--
+                    this.scoreboard.lifes = this.snake.lives
+                }
             }
         }
 
@@ -253,9 +264,11 @@ class Game {
             this.lose()
         }
 
-        if (this.snake.lives === 0) {
-            clearInterval(this.intervalId)
-            this.lose()
+        if (this.level === "hard") {
+            if (this.snake.lives === 0) {
+                clearInterval(this.intervalId)
+                this.lose()
+            }
         }
 
         // Ganar
@@ -301,7 +314,7 @@ class Game {
 
     }
 
-    loadGame () {
+    loadGame () { // Para evitar el bug de que salga primero el fondo y luego el juego
         if (this.isReady === false) {
             instructions.classList.add("stop")
             gameCanvas.classList.remove("stop")
