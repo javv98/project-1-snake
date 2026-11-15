@@ -1,15 +1,16 @@
 class Game {
-    constructor (difficulty) {
+    constructor (difficulty, color) {
         this.canvas = document.getElementById("game")
         this.canvas.width = GAME_W
         this.canvas.height = GAME_H
         this.ctx = this.canvas.getContext("2d")
 
         this.difficulty = difficulty
+        this.color = color
 
         this.intervalId = null
 
-        this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H)
+        this.snake = new Snake (this.ctx, SNAKE_X, SNAKE_Y, SNAKE_W, SNAKE_H, this.color)
         
         this.apple = new Apple (this.ctx, APPLE_W, APPLE_H)
         this.appleCount = 0

@@ -16,6 +16,11 @@ body {
     background-size: 100%;
 }
 
+button:hover:enabled {
+    filter: brightness(1.4);
+    cursor: pointer;
+}
+
 /* Pantalla de inicio */
 
 #startScreen {
@@ -115,6 +120,68 @@ body {
     padding-left: 20px;
 }
 
+#instructions.stop {
+    display: none;
+}
+
+#snakeColor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#snakeColor p {
+    font-size: 0.8rem;
+}
+
+#colorButtons {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#colorButtons button {
+    font-family: "Press Start 2P";
+    padding: 20px;
+    width: 100px;
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#colorButtons .red {
+    background-color: #dfb0b0;
+}
+
+#colorButtons .red img {
+    height: auto;
+    width: 130px;
+}
+
+#colorButtons .green {
+    background-color: #b7d3a3;  
+}
+
+#colorButtons .green img {
+    height: auto;
+    width: 100px;
+}
+
+#colorButtons .blue {
+    background-color: #8ba6d5;  
+}
+
+#colorButtons .blue img {
+    height: auto;
+    width: 130px;
+}
+
+#snakeColor.stop {
+    display: none;
+}
+
 #levelSelection {
     display: flex;
     flex-direction: column;
@@ -123,6 +190,10 @@ body {
 
 #levelSelection p {
     font-size: 0.8rem;
+}
+
+#levelSelection.stop {
+    display: none;
 }
 
 #levelButtons button {
@@ -141,11 +212,6 @@ body {
 #levelButtons .hard {
     background-color: #cb1d09;  
 }
-
-#instructions.stop {
-    display: none;
-}
-
 
 /* Juego */
 #canvas {

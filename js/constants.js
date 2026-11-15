@@ -132,3 +132,6 @@ difficultySound.volume = 0.4
 
 const healAudio = new Audio ("sounds/heal.mp3")
 healAudio.volume = 0.4
+
+const colorSelection = new Audio ("sounds/colorSelection.mp3")
+colorSelection.volume = 0.3

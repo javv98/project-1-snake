@@ -18,7 +18,7 @@ class Apple {
     }
 
     // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente. 
-    randomPosition (xyArray, xEnemy = false, yEnemy = false, xHeart = false, yHeart = false) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
+    randomPosition (xyArray, xEnemy = null, yEnemy = null, xHeart = null, yHeart = null) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
 
         // Luego genero un numero random entre 0 y el tamaño del juego en ambas direcciones
         let randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))
@@ -39,6 +39,7 @@ class Apple {
     getBigger (ctx, positions, body) { // Recibe el array de posiciones y el array del cuerpo
         let newPosition = null
         let newDirection = null
+        let color = null
 
         let sumX = 0
         let sumY = 0
@@ -49,7 +50,6 @@ class Apple {
         }) 
 
         body.forEach((part, index, arr) => {
-
             if (index === arr.length - 1) {
                 if (part.direction === "up") {
                     sumX = 0
@@ -65,10 +65,11 @@ class Apple {
                     sumY = 0
                 }
                 newDirection = part.direction
+                color = part.color
             }
         })
 
-        return new Body (ctx, newPosition[0] + sumX, newPosition[1] + sumY, SNAKE_W, SNAKE_H, true, newDirection)
+        return new Body (ctx, newPosition[0] + sumX, newPosition[1] + sumY, SNAKE_W, SNAKE_H, true, newDirection, color)
     }
 
 

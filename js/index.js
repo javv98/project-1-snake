@@ -8,6 +8,13 @@ const instructions = document.querySelector("#instructions")
 const easyButton = document.querySelector(".easy")
 const mediumButton = document.querySelector(".medium")
 const hardButton = document.querySelector(".hard")
+const snakeColor = document.querySelector("#snakeColor")
+const redButton = document.querySelector(".red")
+const greenButton = document.querySelector(".green")
+const blueButton = document.querySelector(".blue")
+const levelSelection = document.querySelector("#levelSelection")
+
+let color = ""
 
 // Comprueba que se haya introducido un nombre y que no sea un espacio en blanco 
 input.addEventListener("input", () => {
@@ -28,21 +35,42 @@ startButton.addEventListener("click", () => {
     instructions.classList.remove("stop")
 })
 
+redButton.addEventListener("click", () => {
+    color = "red"
+    colorSelection.play()
+    snakeColor.classList.add("stop")
+    levelSelection.classList.remove("stop")
+})
+
+greenButton.addEventListener("click", () => {
+    color = "green"
+    colorSelection.play()
+    snakeColor.classList.add("stop")
+    levelSelection.classList.remove("stop")
+})
+
+blueButton.addEventListener("click", () => {
+    color = "blue"
+    colorSelection.play()
+    snakeColor.classList.add("stop")
+    levelSelection.classList.remove("stop")
+})
+
 easyButton.addEventListener("click", () => {
     difficultySound.play()
-    const game = new Game (4)
+    const game = new Game (4, color)
     game.start()
 })
 
 mediumButton.addEventListener("click", () => {
     difficultySound.play()
-    const game = new Game (6)
+    const game = new Game (6, color)
     game.start()
 })
 
 hardButton.addEventListener("click", () => {
     difficultySound.play()
-    const game = new Game (8)
+    const game = new Game (8, color)
     game.start()
 })
     

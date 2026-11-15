@@ -17,7 +17,7 @@ class Enemy {
     }
 
     // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente ni de la manzana. 
-    randomPosition (xyBodyArray, xApple, yApple, xHeart = false, yHeart = false) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
+    randomPosition (xyBodyArray, xApple, yApple, xHeart = null, yHeart = null) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
 
         // Luego genero un numero random entre 0 y el tamaño del juego en ambas direcciones
         let randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))

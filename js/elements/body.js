@@ -1,22 +1,57 @@
-const skin = new Image ()
-skin.src = "imgs/snake/body.png"
+const greenSkin = new Image ()
 
-skin.columns = 4
-skin.rows = 4
+greenSkin.src = "imgs/snake/green/body.png"
 
-skin.columnIndex = 0
-skin.rowIndex = 2
+greenSkin.columns = 4
+greenSkin.rows = 4
 
-skin.onload = () => {
-    skin.isReady = true
+greenSkin.columnIndex = 0
+greenSkin.rowIndex = 2
 
-    skin.frameW = Math.floor(skin.width / skin.columns)
-    skin.frameH = Math.floor(skin.height / skin.rows)
+greenSkin.onload = () => {
+    greenSkin.isReady = true
+
+    greenSkin.frameW = Math.floor(greenSkin.width / greenSkin.columns)
+    greenSkin.frameH = Math.floor(greenSkin.height / greenSkin.rows)
+}
+
+const redSkin = new Image ()
+
+redSkin.src = "imgs/snake/red/body.png"
+
+redSkin.columns = 4
+redSkin.rows = 4
+
+redSkin.columnIndex = 0
+redSkin.rowIndex = 2
+
+redSkin.onload = () => {
+    redSkin.isReady = true
+
+    redSkin.frameW = Math.floor(redSkin.width / redSkin.columns)
+    redSkin.frameH = Math.floor(redSkin.height / redSkin.rows)
+}
+
+const blueSkin = new Image ()
+
+blueSkin.src = "imgs/snake/blue/body.png"
+
+blueSkin.columns = 4
+blueSkin.rows = 4
+
+blueSkin.columnIndex = 0
+blueSkin.rowIndex = 2
+
+blueSkin.onload = () => {
+    blueSkin.isReady = true
+
+    blueSkin.frameW = Math.floor(blueSkin.width / blueSkin.columns)
+    blueSkin.frameH = Math.floor(blueSkin.height / blueSkin.rows)
 }
 
 class Body {
 
-    constructor (ctx, x, y, w, h, tail = false, direction = "left") {
+    constructor (ctx, x, y, w, h, tail = false, direction = "left", color) {
         this.ctx = ctx
         this.x = x
         this.y = y
@@ -27,7 +62,19 @@ class Body {
 
         this.tail = tail // Para pintar la cola, en el último será true
 
-        this.skin = skin
+        this.color = color
+        
+        if (this.color === "green") {
+            this.skin = greenSkin
+        }
+
+        if (this.color === "red") {
+            this.skin = redSkin
+        }
+
+        if (this.color === "blue") {
+            this.skin = blueSkin
+        }
     }
 
     draw () {

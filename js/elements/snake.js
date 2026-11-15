@@ -1,10 +1,11 @@
 class Snake {
-    constructor (ctx, x, y, w, h) {
+    constructor (ctx, x, y, w, h, color) {
         this.ctx = ctx
         this.x = x
         this.y = y
         this.w = w
         this.h = h
+        this.color = color
 
         this.vx = -CELL_SIZE // Siempre inicia yéndose para la derecha, en dirección a la cabeza
         this.vy = 0
@@ -14,9 +15,19 @@ class Snake {
 
         this.lives = SNAKE_LIVES
 
-
         this.skin = new Image()
-        this.skin.src = "imgs/snake/head.png"
+
+        if (this.color === "green") {
+            this.skin.src = "imgs/snake/green/head.png"
+        }
+
+        if (this.color === "red") {
+            this.skin.src = "imgs/snake/red/head.png"
+        }
+
+        if (this.color === "blue") {
+            this.skin.src = "imgs/snake/blue/head.png"
+        }
 
         this.skin.columns = 4
         this.skin.rows = 4
@@ -74,7 +85,7 @@ class Snake {
     
     // Función para darle una celda más al array de snake en línea recta
     maxSnakeH (x, y, tail) {
-        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h, tail)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
+        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h, tail, "left", this.color)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
     }
 
     //Función para chequear cuando la cabeza se choca con el cuerpo (tiene que ser un bucle porque tiene que chequear con todas las partes del cuerpo)
