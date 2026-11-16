@@ -17,7 +17,7 @@ const levelSelection = document.querySelector("#levelSelection")
 let color = ""
 let level = ""
 
-// Comprueba que se haya introducido un nombre y que no sea un espacio en blanco 
+// Check that a name has been entered and that it is not just a blank space
 input.addEventListener("input", () => {
     if (input.value === "") {
         startButton.setAttribute("disabled", "")
@@ -83,7 +83,7 @@ hardButton.addEventListener("click", () => {
 restartButton.forEach((button) => {
     button.addEventListener("click", (() => {
     restartSound.play()
-    restartSound.addEventListener("ended", (() => { // Cuando termina de reproducirse el audio, se reinicia
+    restartSound.addEventListener("ended", (() => { // The game doesn't restart until the audio has finished playing
         window.location.reload()
     }))
 }))

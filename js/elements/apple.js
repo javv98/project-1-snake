@@ -6,7 +6,7 @@ class Apple {
         this.w = w
         this.h = h
 
-        this.position = [{x: this.x, y: this.y}] // Lo necesitamos para el check collisions
+        this.position = [{x: this.x, y: this.y}] // We need it for check the collisions
 
         this.skin = new Image ()
         this.skin.src = "imgs/apple.png"
@@ -17,14 +17,11 @@ class Apple {
         this.ctx.drawImage(this.skin, this.x, this.y, this.w, this.h)
     }
 
-    // Función para asignar una posición random del tablero pero que NO coincida con la posición de la serpiente. 
-    randomPosition (xyArray, xEnemy = null, yEnemy = null, xHeart = null, yHeart = null) { // Recibe un array de arrays con las x e y de la snake y de cada parte del cuerpo
+    randomPosition (xyArray, xEnemy = null, yEnemy = null, xHeart = null, yHeart = null) {
 
-        // Luego genero un numero random entre 0 y el tamaño del juego en ambas direcciones
         let randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))
         let randomY = Math.floor(Math.random() * (GAME_H - CELL_SIZE))
 
-        // Después compruebo que esa combinación no sea ninguna de las existentes en el cuerpo de la serpiente y que es múltiplo del tamaño de la casilla para que siempre esté bien posicionado
         while ((xyArray.some((xy) => xy[0] === randomX && xy[1] === randomY)) || (randomX % CELL_SIZE !== 0 || randomY % CELL_SIZE !== 0) || (randomX === xEnemy || randomY === yEnemy) || (randomX === xHeart || randomY === yHeart)) {
             randomX = Math.floor(Math.random() * (GAME_W - CELL_SIZE))
             randomY = Math.floor(Math.random() * (GAME_H - CELL_SIZE))
@@ -35,8 +32,8 @@ class Apple {
         this.position = [{x: this.x, y: this.y}]
     }
 
-    //Función para cuando choquemos con la manzana esta haga crecer al cuerpo y desaparezca
-    getBigger (ctx, positions, body) { // Recibe el array de posiciones y el array del cuerpo
+    // Method to make the snake's body grow and the apple disappear when the snake eats it.
+    getBigger (ctx, positions, body) {
         let newPosition = null
         let newDirection = null
         let color = null
@@ -71,6 +68,5 @@ class Apple {
 
         return new Body (ctx, newPosition[0] + sumX, newPosition[1] + sumY, SNAKE_W, SNAKE_H, true, newDirection, color)
     }
-
 
 }

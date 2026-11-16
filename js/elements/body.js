@@ -60,7 +60,7 @@ class Body {
 
         this.direction = direction
 
-        this.tail = tail // Para pintar la cola, en el último será true
+        this.tail = tail
 
         this.color = color
         
@@ -93,7 +93,7 @@ class Body {
         }
     }
 
-    move (x, y, direction) { // Este move dependerá de la anterior y de la posición
+    move (x, y, direction) {
         this.x = x
         this.y = y
         this.direction = direction
@@ -109,7 +109,7 @@ class Body {
     }
 
     changeSprite (arr, index) {
-        // Para giros
+        // For turns
          if (index < arr.length - 1 && this.direction !== arr[index + 1].direction) {
             if (this.direction === "up" && arr[index + 1].direction === "left") {
                 this.skin.columnIndex = 1
@@ -137,7 +137,7 @@ class Body {
                 this.skin.rowIndex = 3
             }
                 
-        } else { // Para línea recta
+        } else { // For straight sprites 
 
             if (this.tail === false) {
                 switch (this.direction) {

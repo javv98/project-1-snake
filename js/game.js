@@ -26,7 +26,7 @@ class Game {
         this.goldenHeartCreated = false
         this.goldenHeartIndex = 1
 
-        this.positions = [] // array con las posiciones actualizadas de todos los elementos, tanto snake [0] como el body (resto de índices)
+        this.positions = [] // Array containing the updated positions of all snake segments: the head at index [0] and the body at the remaining ones. 
 
         this.scoreboard = new Scoreboard (this.appleCount, this.snake.body.length, this.level, this.level === "hard" ? this.snake.lives : "")
 
@@ -95,7 +95,7 @@ class Game {
     }
 
     move () {
-        // MOVE DE LA SNAKE 
+        // SNAKE 
         let bodyDirections = this.snake.body.map((part) => part.direction)
 
         this.snake.move()
@@ -104,15 +104,15 @@ class Game {
             if (index === 0) {
                 part.move(this.positions[index][0], this.positions[index][1], this.snake.direction, this.snake.body, index)
             } else {
-                part.move(this.positions[index][0], this.positions[index][1], bodyDirections[index -1], this.snake.body, index) // Pongo -1 porque en el array "snake.body" el elemento 0 tiene que seguir la posición de la cabeza, que está en otra variable, entonces cuando llega a la posición 1, empezamos a compararnos con el array bodyXPositions que el valor al que tiene que igualar es el de la posición 0, por eso es el index - 1, para igualar al valor que necesito
+                part.move(this.positions[index][0], this.positions[index][1], bodyDirections[index -1], this.snake.body, index) // Use index -1 because bodyDirections also have the head, that we used it for index 0
             }
         })
         this.snake.eatAppleSprite(this.apple)
-        this.updatedPositions() // Cada vez que se mueva actualiza las posiciones en el array
+        this.updatedPositions()
     }
 
     create (thing, immediately) {
-        // CREATE DE LA APPLE
+        // APPLE
         if (thing === "apple" && this.appleCreated === true) {
             if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) {
                 this.appleCreated = false
@@ -132,9 +132,9 @@ class Game {
         }  
 
         
-        // CREATE DEL ENEMIGO (Aparece más tarde de iniciarse el juego)
+        // ENEMY
         if (thing === "enemy") {
-            if (this.snake.body.length > (GAME_GRID * GAME_GRID) - 25) { // No me lo crea si quedan menos de 25 huecos libres en el tablero (lo comprobamos con el tamaño de la serpiente)
+            if (this.snake.body.length > (GAME_GRID * GAME_GRID) - 25) {
                 return
             } else {
 
@@ -154,8 +154,7 @@ class Game {
             }
         } 
 
-        // CREATE DE LA APPLE (Aparece solo cuando tienes menos vidas de las máximas)
-
+        // GOLDEN HEART
        if (thing === "goldenHeart") {
             if (this.snake.body.length > ((GAME_GRID * GAME_GRID) - 10)) {
                 return
@@ -182,7 +181,7 @@ class Game {
         this.scoreboard.clear()
     }
 
-    // Función para crear un array de arrays con las posiciones de la serpiente y su cuerpo
+    // Method to create an array of arrays containing the positions of the snake's head and body.
     updatedPositions () {
         let snakeXY = [this.snake.x, this.snake.y]
         this.positions = [snakeXY]
@@ -193,8 +192,7 @@ class Game {
     }
 
     checkCollisions () {
-        // MANZANA
-        // Checkea si se choca la cabeza con una manzana y la elimina para crear otra
+        // APPLE
         if (this.snake.collisions(this.apple.position)) {
             this.snake.body.push(this.apple.getBigger(this.ctx, this.positions, this.snake.body))
             appleSound.play()
@@ -205,7 +203,7 @@ class Game {
             this.scoreboard.body = this.snake.body.length
         }
 
-        // ENEMIGO
+        // ENEMY
         if (this.enemyCreated) {
             if (this.snake.collisions(this.enemy.position)) {
 
@@ -224,7 +222,7 @@ class Game {
             }
         }
 
-        // GOLDER HEART
+        // GOLDEN HEART
         if (this.goldenHeartCreated) {
             if (this.snake.collisions(this.goldenHeart.position)) {
                 this.snake.lives = this.goldenHeart.heal(this.snake.lives)
@@ -245,16 +243,15 @@ class Game {
         }
     }
 
-    // El juego termina cuando la serpiente se choca con la pared o cuando su array es cero o cuando se choca con una parte de su body
     endGame () {
-        // Perder
-        if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) { // Cuando se choca con una pared
+        // LOSE
+        if (this.snake.x < 0 || this.snake.x > GAME_W - SNAKE_W || this.snake.y < 0 || this.snake.y > GAME_H - SNAKE_H) {
             clearInterval(this.intervalId)
             this.lose()
 
         }
 
-        if (this.snake.body.length === 0) { // Cuando se queda sin elementos en el array body
+        if (this.snake.body.length === 0) {
             clearInterval(this.intervalId)
             this.lose()
         }
@@ -271,8 +268,8 @@ class Game {
             }
         }
 
-        // Ganar
-        if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) { // - 1 porque la cabeza ocupa espacio pero no cuenta en el cuerpo 
+        // WIN
+        if (this.snake.body.length === ((GAME_GRID * GAME_GRID) - 1)) { // -1 because the head takes up space but doesn't count as part of the body
             clearInterval(this.intervalId)
             this.win() 
         } 
@@ -314,7 +311,7 @@ class Game {
 
     }
 
-    loadGame () { // Para evitar el bug de que salga primero el fondo y luego el juego
+    loadGame () { // To prevent the bug where the background appears before the game loads
         if (this.isReady === false) {
             instructions.classList.add("stop")
             gameCanvas.classList.remove("stop")

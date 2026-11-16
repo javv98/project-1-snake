@@ -8,11 +8,11 @@ class Snake {
         this.color = color
         this.level = level
 
-        this.vx = -CELL_SIZE // Siempre inicia yéndose para la derecha, en dirección a la cabeza
+        this.vx = -CELL_SIZE
         this.vy = 0
 
-        this.body = [] // El cuerpo se gestiona como un array
-        this.direction = "left" // Puede ser up, down, left o right, empieza siendo left
+        this.body = [] 
+        this.direction = "left"
 
         if (this.level === "hard") {
             this.lives = SNAKE_LIVES
@@ -45,7 +45,7 @@ class Snake {
             this.skin.frameH = Math.floor(this.skin.height / this.skin.columns)
         }
 
-        this.isChanging = false // Para checkear que si ya has dado una vez para moverte no puedas dar otra vez hasta que no pase a la siguiente vuelta. 
+        this.isChanging = false
     }
 
     draw () {
@@ -71,31 +71,31 @@ class Snake {
         this.isChanging = false
     }
 
-    // Función que se ejecuta al principio para llenar el array inicial de body con las celdas establecidas
+    // Method that runs at the start to fill the initial body array with the predefined cells and initialize the scoreboard accordingly
     firstBody (scoreboard) { 
-        for (let i = 0; i < SNAKE_CELLS; i++) { // Hacemos un bucle para insertar las celdas
+        for (let i = 0; i < SNAKE_CELLS; i++) {
            if (i === 0) {
-            this.maxSnakeH(this.x, this.y) // La primera dependerá de la posición de la cabeza
+            this.maxSnakeH(this.x, this.y)
            } else if (i === SNAKE_CELLS - 1) {
             this.maxSnakeH(this.x, this.y, true)
            } else {
-            this.maxSnakeH(this.body[this.body.length - 1].x, this.y) // Las siguientes dependerán de la posición de la última parte del body
+            this.maxSnakeH(this.body[this.body.length - 1].x, this.y)
            }
         }
 
         scoreboard.body = SNAKE_CELLS
     } 
     
-    // Función para darle una celda más al array de snake en línea recta
+    // Method to add one more cell to the snake array in a straight line
     maxSnakeH (x, y, tail) {
-        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h, tail, "left", this.color)) // las siguientes la x varia según donde acabó la x anterior + el tamaño de la celda
+        this.body.push(new Body (this.ctx, x + CELL_SIZE, y, this.w, this.h, tail, "left", this.color))
     }
 
-    //Función para chequear cuando la cabeza se choca con el cuerpo (tiene que ser un bucle porque tiene que chequear con todas las partes del cuerpo)
-    collisions(body) { // RECIBE UN ARRAY DE OBJETOS
+    
+    collisions(body) { // Receives an array of objects
         let boolean = false
         body.forEach ((part) => {
-            if ((this.x === part.x) && (this.y === part.y)) { // Al moverse por bloques iguales, necesitamos que la cabeza entre en un bloque ocupado por el cuerpo.
+            if ((this.x === part.x) && (this.y === part.y)) {
                 boolean = true
                 return
             }
@@ -149,8 +149,9 @@ class Snake {
         })
     }
 
-    eatAppleSprite (apple) { // Recibe el objeto manzana actual
-        // En la casilla de antes abre la boca
+    // Method to change the snake's sprites before and while eating an apple
+    eatAppleSprite (apple) {
+
         if (this.direction === "up") {
 
             if (apple.y === this.y - CELL_SIZE && apple.x === this.x) {

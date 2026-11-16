@@ -21,7 +21,7 @@ button:hover:enabled {
     cursor: pointer;
 }
 
-/* Pantalla de inicio */
+/* Start screen */
 
 #startScreen {
     height: 500px;
@@ -73,7 +73,7 @@ button:hover:enabled {
 #startScreen.stop {
     display: none;
 }
-/* Pantalla instrucciones */
+/* How to play screen */
 
 #instructions {
     font-family: "Press Start 2P";
@@ -267,7 +267,7 @@ button:hover:enabled {
     background-color: #cb1d09;  
 }
 
-/* Juego */
+/* Game */
 #canvas {
     height: 100%;
     width: 100%;
@@ -291,7 +291,7 @@ button:hover:enabled {
     display: none;
 }
 
-/* Pantalla perder */
+/* End Screen */
 
 #endScreen {
     height: 500px;
@@ -347,7 +347,7 @@ button:hover:enabled {
     width: 48px;
 }
 
-/* Pantalla ganar */
+/* Win screen */
 
 #winScreen {
     height: 500px;
